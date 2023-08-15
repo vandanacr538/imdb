@@ -1,15 +1,24 @@
 .main-container{
     padding: 50px;
     box-sizing: border-box;
-}
-.banner{
-    height: 450px;
-    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    height: 700px;
 }
 .horizontal-carousel{
+    height: 550px;
     position: relative;
+    width: 70%;
 }
-.banner-details{
+.vertical-carousel{
+    height: 100%;
+    width: 29%;
+}
+.horizontal-banner{
+    height: 100%;
+    width: 100%;
+}
+.horizontal-banner-details{
     position: absolute;
     bottom: 40px;
     left: 200px;
@@ -18,7 +27,8 @@
     display: flex;
     align-items: center;
 }
-.title{
+.horizontal-banner-title{
+    margin-left: 10px;
     font-size: 25px;
     font-weight: 500;
 }
@@ -42,7 +52,7 @@
 }
 .carousel-nav-right{
     position: absolute;
-    right: 35%;
+    right: 10px;
     bottom: 50%;
 }
 .nav-icon{
@@ -50,4 +60,28 @@
 }
 .carousel-nav:hover{
     color: #f5c518;;
+}
+.video-link{
+    text-decoration: none;
+    color: #fff;
+}
+.video-link:hover{
+    color: #f5c518;
+}
+.vertical-carousel h3{
+    color: #f5c518;
+    margin: 0;
+}
+.vertical-movies-box{
+    background-color: #272525;
+    margin: 10px 0px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.vertical-movies{
+    margin-top:10px;
+    display: flex;
+}
+.vertical-m-details{
+    margin-left: 10px;
 }
