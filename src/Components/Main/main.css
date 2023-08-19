@@ -1,9 +1,8 @@
 .main-container{
-    padding: 50px;
-    box-sizing: border-box;
+    margin: 50px 50px 0px;
     display: flex;
     justify-content: space-between;
-    height: 700px;
+    height: 550px;
 }
 .horizontal-carousel{
     height: 550px;
