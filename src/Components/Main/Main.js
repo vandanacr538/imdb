@@ -10,19 +10,35 @@ import axios from "axios";
 export default function Main() {
   const [moviesArr, setMoviesArr] = useState([]);
   const [currentMovie, setCurrentMovie] = useState({});
+  const [i, setI]=useState(1);
 
   const handleClickForward = () => {
     if (moviesArr.indexOf(currentMovie) === moviesArr.length - 1) {
       setCurrentMovie(moviesArr[0]);
-    } else {
+      setI(1);
+    }
+    else if(moviesArr.indexOf(currentMovie) === moviesArr.length - 2){
       setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
+      setI(0);
+    }
+    else {
+      setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
+      setI(moviesArr.indexOf(currentMovie)+2);
     }
   };
+
   const handleClickBackward = () => {
     if (moviesArr.indexOf(currentMovie) === 0) {
       setCurrentMovie(moviesArr[moviesArr.length - 1]);
-    } else {
+      setI(0);
+    } 
+    else if(moviesArr.indexOf(currentMovie) === 1){
       setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) - 1]);
+      setI(1);
+    }
+    else {
+      setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) - 1]);
+      setI(moviesArr.indexOf(currentMovie));
     }
   };
 
@@ -72,7 +88,7 @@ export default function Main() {
       <div className="vertical-carousel">
         <h3>Up next</h3>
         <div className="vertical-movies-box">
-          {moviesArr
+          {moviesArr.slice(i, moviesArr.length)
             .filter((element, index) => index < 3)
             .map((element) => {
               return (
