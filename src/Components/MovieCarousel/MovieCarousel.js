@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./moviecarousel.css";
 import {
   Add,
@@ -13,6 +13,7 @@ import { Box, Button, Modal, Rating, Typography } from "@mui/material";
 import axios from "axios";
 
 export default function MovieCarousel(props) {
+  const cardElement=useRef();
   const [moviesArr, setMoviesArr] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -20,14 +21,14 @@ export default function MovieCarousel(props) {
   const [value, setValue] = useState(0);
 
   const handleClickBackward = () => {
-    document.getElementById("cards").scrollBy({
+    cardElement.current.scrollBy({
       top: 100,
       left: -1000,
       behavior: "smooth",
     });
   };
   const handleClickForward = () => {
-    document.getElementById("cards").scrollBy({
+    cardElement.current.scrollBy({
       top: 100,
       left: 1000,
       behavior: "smooth",
@@ -35,7 +36,7 @@ export default function MovieCarousel(props) {
   };
   const getMovies = async () => {
     const res = await axios.get(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      props.api,
       {
         headers: {
           Authorization:
@@ -66,7 +67,7 @@ export default function MovieCarousel(props) {
         >
           <NavigateNext className="nav-icon" />
         </button>
-        <div className="cards" id="cards">
+        <div className="cards" ref={cardElement}>
           {moviesArr?.map((element, index) => {
             return (
               <>
