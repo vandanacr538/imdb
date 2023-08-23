@@ -1,0 +1,23 @@
+.unauth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.unauth p{
+    margin:10px 0px 0px;
+}
+.signin-btn{
+    margin: 35px;
+    background-color: #3b3b3b;
+    border: none;
+    width: 160px;
+    height: 35px;
+    border-radius: 4px;
+    color: #1976d2;
+    font-family: inherit;
+    font-size: 14px;  
+    cursor: pointer;
+}
+.signin-btn:hover{
+    background-color: hsla(0, 0%, 23%, 0.733);
+}
