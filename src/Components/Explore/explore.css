@@ -1,0 +1,10 @@
+.tab-container{
+    margin: -24px;
+}
+.tab-content{
+    margin:-35px -50px -50px;
+    min-height: 500px;
+}
+.css-1aquho2-MuiTabs-indicator{
+    background-color: #f5c518 !important;
+}
