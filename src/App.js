@@ -5,7 +5,10 @@ import Header from './Components/Header/Header';
 import Main from './Components/Main/Main';
 import MovieCarousel from './Components/MovieCarousel/MovieCarousel';
 import ProtectedLayout from './Components/ProtectedLayout/ProtectedLayout';
-import Explore from './Components/Explore/Explore';
+import { Suspense, lazy } from 'react';
+import FallbackComp from './Components/FallbackComp/FallbackComp';
+
+const Explore=lazy(()=>import('./Components/Explore/Explore'));
 
 function App() {
   return (
@@ -25,7 +28,9 @@ function App() {
           </Route>
         </Route>
       </Routes>
-      <Explore/>
+      <Suspense fallback={<FallbackComp/>}>
+        <Explore/>
+      </Suspense>
       </BrowserRouter>
     </div>
   );
