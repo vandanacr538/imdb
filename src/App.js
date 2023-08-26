@@ -1,36 +1,20 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Ad from './Components/Advertisement/Ad';
+import MainComp from './Components/MainComp/MainComp';
+import Play from './Components/Play/Play';
 import Header from './Components/Header/Header';
-import Main from './Components/Main/Main';
-import MovieCarousel from './Components/MovieCarousel/MovieCarousel';
-import ProtectedLayout from './Components/ProtectedLayout/ProtectedLayout';
-import { Suspense, lazy } from 'react';
-import FallbackComp from './Components/FallbackComp/FallbackComp';
-
-const Explore=lazy(()=>import('./Components/Explore/Explore'));
+import Ad from './Components/Advertisement/Ad';
 
 function App() {
   return (
     <div>
-      <BrowserRouter>
       <Header/>
       <Ad/>
-      <Main/>
-      <h1 style={{color:"#f5c518", marginLeft:"49px"}}>What to watch</h1>
-      <MovieCarousel heading="Top Picks" api="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"></MovieCarousel>
-      <MovieCarousel heading="Popular" api="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"></MovieCarousel>
+      <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProtectedLayout/>}>
-          <Route path="/" element={<MovieCarousel 
-          heading="From Your Watchlist" 
-          api="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"/>}>
-          </Route>
-        </Route>
+        <Route path='/' element={<MainComp/>}></Route>
+        <Route path='/play/:id' element={<Play/>}></Route>
       </Routes>
-      <Suspense fallback={<FallbackComp/>}>
-        <Explore/>
-      </Suspense>
       </BrowserRouter>
     </div>
   );

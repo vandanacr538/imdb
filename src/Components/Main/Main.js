@@ -6,11 +6,13 @@ import {
   PlayCircleOutline,
 } from "@mui/icons-material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
   const [moviesArr, setMoviesArr] = useState([]);
   const [currentMovie, setCurrentMovie] = useState({});
   const [i, setI]=useState(1);
+  const navigate=useNavigate()
 
   const handleClickForward = () => {
     if (moviesArr.indexOf(currentMovie) === moviesArr.length - 1) {
@@ -41,6 +43,10 @@ export default function Main() {
       setI(moviesArr.indexOf(currentMovie));
     }
   };
+
+  const handleClickVideo=(elem)=>{
+    navigate("/play/" + elem);
+  }
 
   const getMovies = async () => {
     const res = await axios.get(
@@ -74,7 +80,7 @@ export default function Main() {
         <img src={`https://image.tmdb.org/t/p/w1280/` + currentMovie.poster_path} className="horizontal-banner"></img>
         <div className="horizontal-banner-details">
           <a href="" className="video-link">
-            <PlayCircleOutline sx={{ fontSize: "60px" }} />
+            <PlayCircleOutline sx={{ fontSize: "60px" }} onClick={()=>handleClickVideo(currentMovie.id)}/>
           </a>
           <h1 className="horizontal-banner-title">{currentMovie.title}</h1>
         </div>
