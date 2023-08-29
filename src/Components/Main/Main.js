@@ -14,7 +14,25 @@ export default function Main() {
   const [i, setI]=useState(1);
   const navigate=useNavigate()
 
+  const autoUpdate=()=>{
+    if(moviesArr.length>0){
+      if(moviesArr.indexOf(currentMovie) === moviesArr.length - 1){
+        setCurrentMovie(moviesArr[0]);
+        setI(1);
+      }
+      else if(moviesArr.indexOf(currentMovie) === moviesArr.length - 2){
+        setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
+        setI(0);
+      }
+      else{
+        setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
+        setI(moviesArr.indexOf(currentMovie)+2);
+      }
+    }
+  }
+
   const handleClickForward = () => {
+    clearInterval(myInterval);
     if (moviesArr.indexOf(currentMovie) === moviesArr.length - 1) {
       setCurrentMovie(moviesArr[0]);
       setI(1);
@@ -63,6 +81,8 @@ export default function Main() {
     setCurrentMovie(res.data.results[0]);
     console.log(res);
   };
+
+  let myInterval=setInterval(autoUpdate, 5000);
 
   useEffect(() => {
     getMovies();
