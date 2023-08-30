@@ -1,0 +1,47 @@
+footer{
+    margin: 30px 50px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+}
+.footer-signin-btn{
+    background-color: #f5c518;
+    border: none;
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+}
+.footer-smlinks{
+    display: flex;
+    justify-content: center;
+}
+.footer-sm-link{
+    color: #fff;
+    margin: 10px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.footer-sm-link:hover{
+    background-color: #3b3b3b;
+}
+.footer-menu{
+    width: 60%;
+    margin: 0 auto;
+}
+.footer-menu a{
+    color: #fff;
+    display: inline-block;
+    margin: 20px 10px 10px;
+}
+.footer-copyright{
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+}
