@@ -9,10 +9,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Main() {
+  let myTimeout;
   const [moviesArr, setMoviesArr] = useState([]);
   const [currentMovie, setCurrentMovie] = useState({});
   const [i, setI]=useState(1);
-  const navigate=useNavigate()
+  const navigate=useNavigate();
 
   const autoUpdate=()=>{
     if(moviesArr.length>0){
@@ -21,18 +22,20 @@ export default function Main() {
         setI(1);
       }
       else if(moviesArr.indexOf(currentMovie) === moviesArr.length - 2){
+        console.log("second last")
         setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
         setI(0);
       }
       else{
         setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
         setI(moviesArr.indexOf(currentMovie)+2);
+        console.log("other");
       }
     }
   }
 
   const handleClickForward = () => {
-    clearInterval(myInterval);
+    clearTimeout(myTimeout);
     if (moviesArr.indexOf(currentMovie) === moviesArr.length - 1) {
       setCurrentMovie(moviesArr[0]);
       setI(1);
@@ -48,6 +51,7 @@ export default function Main() {
   };
 
   const handleClickBackward = () => {
+    clearTimeout(myTimeout);
     if (moviesArr.indexOf(currentMovie) === 0) {
       setCurrentMovie(moviesArr[moviesArr.length - 1]);
       setI(0);
@@ -82,7 +86,9 @@ export default function Main() {
     console.log(res);
   };
 
-  let myInterval=setInterval(autoUpdate, 5000);
+  useEffect(() => {
+    myTimeout = setTimeout(autoUpdate, 5000);
+  }, [moviesArr, currentMovie]); // we can use currentMovie.poster_path instead of currentMovie
 
   useEffect(() => {
     getMovies();

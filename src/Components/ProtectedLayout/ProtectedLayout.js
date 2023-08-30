@@ -11,7 +11,7 @@ export default function ProtectedLayout() {
     if(localStorage.getItem("token")===null){
         setLoggedIn(false);
     }
-  })
+  }, [])
 
   return (
     <div>
