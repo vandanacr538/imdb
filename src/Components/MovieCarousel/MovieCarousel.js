@@ -34,18 +34,42 @@ export default function MovieCarousel(props) {
       behavior: "smooth",
     });
   };
-  const getMovies = async () => {
-    const res = await axios.get(
-      props.api,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-        },
-      }
+
+  const addToWatchlist=async(element)=>{
+    const response=await axios.post("http://localhost:8080/watchlist/addtowatchlist", element,
+    {
+      headers:{
+        Authorization:localStorage.getItem("token"),
+      },
+    }
     );
-    setMoviesArr(res.data.results);
+  }
+   
+  const getMovies = async () => {
+    if(props.auth==="own"){
+      const res = await axios.get(
+        props.api,
+        {
+          headers: {
+            Authorization:localStorage.getItem("token"),
+          },
+        }
+      );
+      setMoviesArr(res.data.results);
+    }
+    else{
+      const res = await axios.get(
+        props.api,
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
+          },
+        }
+      );
+      setMoviesArr(res.data.results);
+    }
   };
   useEffect(() => {
     getMovies();
@@ -72,7 +96,7 @@ export default function MovieCarousel(props) {
             return (
               <>
                 <div className="card">
-                  <div className="overlay-icon">
+                  <div className="overlay-icon" onClick={()=>{addToWatchlist(element)}}>
                     <Bookmark className="overlay-bookmark" />
                     <div className="overlay-add-icon">
                       <Add />

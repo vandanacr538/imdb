@@ -13,16 +13,18 @@ export default function MainComp() {
     <div>
         <Main/>
         <h1 style={{color:"#f5c518", marginLeft:"49px"}}>What to watch</h1>
-        <MovieCarousel heading="Top Picks" api="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"></MovieCarousel>
+        <MovieCarousel heading="Top Picks" api="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1" auth="tmdb"></MovieCarousel>
         <Routes>
           <Route path="/" element={<ProtectedLayout/>}>
             <Route path="/" element={<MovieCarousel 
             heading="From Your Watchlist" 
-            api="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"/>}>
+            api="http://localhost:8080/watchlist/mywatchlist"
+            auth="own"/>}
+            >
             </Route>
           </Route>
         </Routes>
-        <MovieCarousel heading="Popular" api="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"></MovieCarousel>
+        <MovieCarousel heading="Popular" api="https://api.themoviedb.org/3/movie/popular?language=en-US&page=1" auth="tmdb"></MovieCarousel>
         <Suspense fallback={<FallbackComp/>}>
             <Explore/>
         </Suspense>
