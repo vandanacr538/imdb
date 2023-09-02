@@ -36,13 +36,22 @@ export default function MovieCarousel(props) {
   };
 
   const addToWatchlist=async(element)=>{
-    const response=await axios.post("http://localhost:8080/watchlist/addtowatchlist", element,
-    {
-      headers:{
-        Authorization:localStorage.getItem("token"),
-      },
+    try{
+      const response=await axios.post("http://localhost:8080/watchlist/addtowatchlist", element,
+      {
+        headers:{
+          Authorization:localStorage.getItem("token"),
+        },
+      }
+      );
+      if(response.status===200){
+        window.location.reload();
+        alert(response.data.msg);
+      }
     }
-    );
+    catch(e){
+      console.log(e);
+    }
   }
    
   const getMovies = async () => {
