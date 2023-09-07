@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
   const [loginData, setLoginData]=useState({});
@@ -16,6 +17,13 @@ export default function Login() {
     const response=await axios.post("http://localhost:8080/login/loginapi", loginData);
     localStorage.setItem("token", response.data.token);
     navigate("/");
+  }
+  const sendToken=async(token)=>{
+    const response=await axios.post("http://localhost:8080/login/oauth", {token:token.credential});
+    if(response.status===200 && response.data.msg==="Already verified user" || response.data.msg==="oauth successfull"){
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    }
   }
 
   return (
@@ -32,7 +40,16 @@ export default function Login() {
         <div className='signin-fields'>
             <button className='signin' onClick={validataLogin}>Sign in</button>
         </div>
-        <img src="https://miro.medium.com/v2/resize:fit:1400/1*u0bwdudgoyKjSLntsRcqiw.png" className='g-signin-img'></img>
+        <div className='g-signin'>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              sendToken(credentialResponse);
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </div>
     </div>
   )
 }

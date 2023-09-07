@@ -6,10 +6,12 @@ import Header from './Components/Header/Header';
 import Ad from './Components/Advertisement/Ad';
 import Footer from './Components/Footer/Footer';
 import Login from './Pages/Login/Login';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   return (
-    <div>
+    <GoogleOAuthProvider clientId='484151294674-jno436mqufdpsenrg2csnllfdpu8f1g8.apps.googleusercontent.com'>
+      <div>
       <Header/>
       <Ad/>
       <BrowserRouter>
@@ -21,6 +23,7 @@ function App() {
       <Footer/>
       </BrowserRouter>
     </div>
+    </GoogleOAuthProvider>
   );
 }
 
