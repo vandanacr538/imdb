@@ -19,6 +19,7 @@ export default function MovieCarousel(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [value, setValue] = useState(0);
+  const [keys, setKeys]=useState();
 
   const handleClickBackward = () => {
     cardElement.current.scrollBy({
@@ -78,6 +79,43 @@ export default function MovieCarousel(props) {
         }
       );
       setMoviesArr(res.data.results);
+
+      const getIds=res.data.results.map(async(element)=>{
+        const response=await axios.get("https://api.themoviedb.org/3/movie/" +element.id+ "/videos?language=en-US",
+        {
+          headers:{
+            Authorization:
+            "Bearer "+
+            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0"
+          },
+        });
+        return response.data;
+      }); 
+      // getIds will be an array of promises
+      // console.log(getIds);
+
+      Promise.all(getIds).then((data)=>{
+        const final=data.map((element)=>{
+          return element.results.filter((filteredElement)=>{
+            return filteredElement.type==="Trailer" && filteredElement.name==="Official Trailer";
+          });
+        });
+        console.log(final);
+        const movieKeysArr=final.map((elem)=>{
+          if(elem.length!=0){
+            if(elem[0].hasOwnProperty("key")){
+              return elem[0].key;
+            }
+          }
+          else{
+            return "random";
+          }
+        });
+        console.log(movieKeysArr);
+        console.log(movieKeysArr[1]);
+        setKeys(movieKeysArr);
+      });
+
     }
   };
   useEffect(() => {
@@ -134,7 +172,15 @@ export default function MovieCarousel(props) {
                     <div className="watch-trailer">
                       <Button className="watch-trailer-btn">
                         <PlayArrow style={{ marginRight: "5px" }} />
-                        Trailer
+                        {keys?.map((keyElement,keyindex) => {
+                          return (
+                            <>
+                            {keyindex===index &&
+                                <a href={"https://youtube.com/watch?v=" + keyElement}>Trailer</a>
+                            }
+                            </>
+                          );
+                        })}
                       </Button>
                       <Button className="not-btn">{"!"}</Button>
                     </div>
