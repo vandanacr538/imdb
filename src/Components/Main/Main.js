@@ -14,6 +14,7 @@ export default function Main() {
   const [currentMovie, setCurrentMovie] = useState({});
   const [i, setI]=useState(1);
   const navigate=useNavigate();
+  const [bannerUpdate, setBannerUpdate]=useState(true);
 
   const autoUpdate=()=>{
     if(moviesArr.length>0){
@@ -22,20 +23,23 @@ export default function Main() {
         setI(1);
       }
       else if(moviesArr.indexOf(currentMovie) === moviesArr.length - 2){
-        console.log("second last")
         setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
         setI(0);
       }
       else{
         setCurrentMovie(moviesArr[moviesArr.indexOf(currentMovie) + 1]);
         setI(moviesArr.indexOf(currentMovie)+2);
-        console.log("other");
       }
     }
   }
 
   const handleClickForward = () => {
-    clearTimeout(myTimeout);
+    setBannerUpdate(false);
+    setBannerUpdate((state) => {
+        console.log("value is", state); 
+        clearTimeout(myTimeout);
+        return state;
+    });
     if (moviesArr.indexOf(currentMovie) === moviesArr.length - 1) {
       setCurrentMovie(moviesArr[0]);
       setI(1);
@@ -51,7 +55,12 @@ export default function Main() {
   };
 
   const handleClickBackward = () => {
-    clearTimeout(myTimeout);
+    setBannerUpdate(false);
+    setBannerUpdate((state)=>{
+      clearTimeout(myTimeout);
+      console.log("value updated:"+state);
+      return state;
+    });
     if (moviesArr.indexOf(currentMovie) === 0) {
       setCurrentMovie(moviesArr[moviesArr.length - 1]);
       setI(0);
@@ -87,7 +96,9 @@ export default function Main() {
   };
 
   useEffect(() => {
-    myTimeout = setTimeout(autoUpdate, 5000);
+    if(bannerUpdate===true){
+      myTimeout = setTimeout(autoUpdate, 3000);
+    }
   }, [moviesArr, currentMovie]); // we can use currentMovie.poster_path instead of currentMovie
 
   useEffect(() => {
