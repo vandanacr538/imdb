@@ -5,11 +5,11 @@ import { Outlet } from "react-router-dom";
 import './protectedlayout.css';
 
 export default function ProtectedLayout() {
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   useEffect(()=>{
-    if(localStorage.getItem("token")===null){
-        setLoggedIn(false);
+    if(localStorage.getItem("token")){
+        setLoggedIn(true);
     }
   }, [])
 

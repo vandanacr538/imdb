@@ -7,7 +7,8 @@ import {
 } from "@mui/icons-material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
+let historyItems=[];
 export default function Main() {
   let myTimeout;
   const [moviesArr, setMoviesArr] = useState([]);
@@ -76,7 +77,9 @@ export default function Main() {
   };
 
   const handleClickVideo=(elem)=>{
-    navigate("/play/" + elem);
+    historyItems.push(elem);
+    Cookies.set("history", JSON.stringify(historyItems));
+    navigate("/play/" + elem.id);
   }
 
   const getMovies = async () => {
@@ -117,7 +120,7 @@ export default function Main() {
         <img src={`https://image.tmdb.org/t/p/w1280/` + currentMovie.poster_path} className="horizontal-banner"></img>
         <div className="horizontal-banner-details">
           <a href="" className="video-link">
-            <PlayCircleOutline sx={{ fontSize: "60px" }} onClick={()=>handleClickVideo(currentMovie.id)}/>
+            <PlayCircleOutline sx={{ fontSize: "60px" }} onClick={()=>handleClickVideo(currentMovie)}/>
           </a>
           <h1 className="horizontal-banner-title">{currentMovie.title}</h1>
         </div>

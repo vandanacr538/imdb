@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
+import Cookies from 'js-cookie';
 
 export default function Login() {
   const [loginData, setLoginData]=useState({});
@@ -25,6 +26,9 @@ export default function Login() {
       navigate("/");
     }
   }
+  useEffect(()=>{
+    console.log(JSON.parse(Cookies.get("history")));
+  }, [])
 
   return (
     <div className='signin-container'>
