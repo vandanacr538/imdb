@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
+import History from '../../Components/History/History';
 
 export default function Login(props) {
   const [loginData, setLoginData]=useState({});
@@ -27,35 +28,35 @@ export default function Login(props) {
       navigate("/");
     }
   }
-  useEffect(()=>{
-    if(Cookies.get("history")){
-      console.log(JSON.parse(Cookies.get("history")));
-    }
-  }, [])
 
   return (
-    <div className='signin-container'>
-        <h1>Sign in</h1>
-        <div className='signin-fields'>
-            <label for="email">Email</label>
-            <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
+    <div className='signin-main-box'>
+        <div className='signin-container'>
+          <h1>Sign in</h1>
+          <div className='signin-fields'>
+              <label for="email">Email</label>
+              <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
+          </div>
+          <div className='signin-fields'>
+              <label for="password">Password</label>
+              <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
+          </div>
+          <div className='signin-fields'>
+              <button className='signin' onClick={validataLogin}>Sign in</button>
+          </div>
+          <div className='g-signin'>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                sendToken(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </div>
         </div>
-        <div className='signin-fields'>
-            <label for="password">Password</label>
-            <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
-        </div>
-        <div className='signin-fields'>
-            <button className='signin' onClick={validataLogin}>Sign in</button>
-        </div>
-        <div className='g-signin'>
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              sendToken(credentialResponse);
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
+        <div>
+          <History/>
         </div>
     </div>
   )

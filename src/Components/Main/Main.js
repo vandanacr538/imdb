@@ -77,7 +77,16 @@ export default function Main() {
   };
 
   const handleClickVideo=(elem)=>{
-    historyItems.push(elem);
+    if(Cookies.get("history")){
+      const oldItems=JSON.parse(Cookies.get("history"));
+      // historyItems=[...oldItems]
+      // historyItems.push(elem);
+      historyItems.push(...oldItems, {poster_path:elem.poster_path});
+    }
+    else{
+      historyItems.push({poster_path:elem.poster_path});
+      console.log(historyItems)
+    }
     Cookies.set("history", JSON.stringify(historyItems));
     navigate("/play/" + elem.id);
   }
