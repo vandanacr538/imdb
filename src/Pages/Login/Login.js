@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 
-export default function Login() {
+export default function Login(props) {
   const [loginData, setLoginData]=useState({});
   const navigate=useNavigate();
 
@@ -17,6 +17,7 @@ export default function Login() {
   const validataLogin=async()=>{
     const response=await axios.post("http://localhost:8080/login/loginapi", loginData);
     localStorage.setItem("token", response.data.token);
+    props.setAuthButton("Sign Out");
     navigate("/");
   }
   const sendToken=async(token)=>{
@@ -27,7 +28,9 @@ export default function Login() {
     }
   }
   useEffect(()=>{
-    console.log(JSON.parse(Cookies.get("history")));
+    if(Cookies.get("history")){
+      console.log(JSON.parse(Cookies.get("history")));
+    }
   }, [])
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import { Box, Button, MenuItem, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -15,8 +15,9 @@ import {
   VideoLibrary,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
-export default function Header() {
+export default function Header(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -164,8 +165,15 @@ export default function Header() {
         </Button>
         <Button className="header-btn"
         onClick={()=>{
-          navigate("/login");
-        }}>Sign In</Button>
+          if(localStorage.getItem("token")){
+            localStorage.removeItem("token");
+            Cookies.remove("history");
+            window.location.reload();
+          }
+          else{
+            navigate("/login");
+          }
+        }}>{props.authButton}</Button>
         <select className="select-language">
           <option>English</option>
           <option>Italiano</option>
