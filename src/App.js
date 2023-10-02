@@ -12,9 +12,9 @@ function App() {
   return (
     <GoogleOAuthProvider clientId='484151294674-jno436mqufdpsenrg2csnllfdpu8f1g8.apps.googleusercontent.com'>
       <div>
+      <BrowserRouter>
       <Header/>
       <Ad/>
-      <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainComp/>}></Route>
         <Route path='/play/:id' element={<Play/>}></Route>

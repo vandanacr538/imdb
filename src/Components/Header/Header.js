@@ -14,11 +14,13 @@ import {
   Tv,
   VideoLibrary,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate=useNavigate();
 
   return (
     <div>
@@ -160,7 +162,10 @@ export default function Header() {
           <BookmarkAdd/>
           <span className="header-btn-text">Watchlist</span>
         </Button>
-        <Button className="header-btn">Sign In</Button>
+        <Button className="header-btn"
+        onClick={()=>{
+          navigate("/login");
+        }}>Sign In</Button>
         <select className="select-language">
           <option>English</option>
           <option>Italiano</option>
