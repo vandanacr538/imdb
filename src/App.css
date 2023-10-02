@@ -1,0 +1,11 @@
+.back-to-top-btn{
+    width: 130px;
+    height: 28px;
+    border-radius: 20px;
+    border: none;
+    position: fixed;
+    top:30px;
+    left: 45%;
+    z-index: 2;
+    cursor: pointer;
+}

@@ -11,6 +11,9 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [authButton, setAuthButton]=useState("Sign In");
+  const scrollToTop=()=>{
+    window.scroll({top:0, behavior:"smooth"});
+  }
   useEffect(()=>{
     if(localStorage.getItem("token")){
       setAuthButton("Sign Out");
@@ -19,6 +22,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId='484151294674-jno436mqufdpsenrg2csnllfdpu8f1g8.apps.googleusercontent.com'>
       <div>
+      <button className='back-to-top-btn' onClick={scrollToTop}>Back to top</button>
       <BrowserRouter>
       <Header authButton={authButton}/>
       <Ad/>
