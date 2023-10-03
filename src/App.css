@@ -8,4 +8,7 @@
     left: 45%;
     z-index: 2;
     cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
