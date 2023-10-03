@@ -11,24 +11,26 @@ export default function History() {
   }, []);
   return (
     <div>
-      <div className="history-container">
-        <div className="history-header">
-          <h2 className="history-heading">Recently Viewed</h2>
-          <a href="#" className="clear-history">
-            Clear your history
-          </a>
+      {cookieMovies && cookieMovies.length ? (
+        <div className="history-container">
+          <div className="history-header">
+            <h2 className="history-heading">Recently Viewed</h2>
+            <a href="#" className="clear-history">
+              Clear your history
+            </a>
+          </div>
+          {cookieMovies?.map((element) => {
+            return (
+              <>
+                <img
+                  src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}
+                  className="history-img"
+                ></img>
+              </>
+            );
+          })}
         </div>
-        {cookieMovies?.map((element) => {
-          return (
-            <>
-              <img
-                src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}
-                className="history-img"
-              ></img>
-            </>
-          );
-        })}
-      </div>
+      ):""}
     </div>
   );
 }
