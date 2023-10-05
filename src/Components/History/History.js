@@ -4,12 +4,12 @@ import "./history.css";
 
 export default function History() {
   const [cookieMovies, setCookieMovies] = useState([]);
-  const clearHistory=()=>{
-    if(Cookies.get("history")){
+  const clearHistory = () => {
+    if (Cookies.get("history")) {
       Cookies.remove("history");
       window.location.reload();
     }
-  }
+  };
   useEffect(() => {
     if (Cookies.get("history")) {
       setCookieMovies(JSON.parse(Cookies.get("history")));
@@ -17,26 +17,24 @@ export default function History() {
   }, []);
   return (
     <div>
-      {cookieMovies && cookieMovies.length ? (
-        <div className="history-container">
-          <div className="history-header">
-            <h2 className="history-heading">Recently Viewed</h2>
-            <p id="clear-history" onClick={clearHistory}>
-              Clear your history
-            </p>
-          </div>
-          {cookieMovies?.map((element) => {
-            return (
-              <>
-                <img
-                  src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}
-                  className="history-img"
-                ></img>
-              </>
-            );
-          })}
+      <div className="history-container">
+        <div className="history-header">
+          <h2 className="history-heading">Recently Viewed</h2>
+          <p id="clear-history" onClick={clearHistory}>
+            Clear your history
+          </p>
         </div>
-      ):""}
+        {cookieMovies?.map((element) => {
+          return (
+            <>
+              <img
+                src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}
+                className="history-img"
+              ></img>
+            </>
+          );
+        })}
+      </div>
     </div>
   );
 }
