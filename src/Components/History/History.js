@@ -4,6 +4,12 @@ import "./history.css";
 
 export default function History() {
   const [cookieMovies, setCookieMovies] = useState([]);
+  const clearHistory=()=>{
+    if(Cookies.get("history")){
+      Cookies.remove("history");
+      window.location.reload();
+    }
+  }
   useEffect(() => {
     if (Cookies.get("history")) {
       setCookieMovies(JSON.parse(Cookies.get("history")));
@@ -15,9 +21,9 @@ export default function History() {
         <div className="history-container">
           <div className="history-header">
             <h2 className="history-heading">Recently Viewed</h2>
-            <a href="#" className="clear-history">
+            <p id="clear-history" onClick={clearHistory}>
               Clear your history
-            </a>
+            </p>
           </div>
           {cookieMovies?.map((element) => {
             return (

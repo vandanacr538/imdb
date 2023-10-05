@@ -16,13 +16,13 @@
     margin: 0px 0px 12px;
     font-size: 20px;
 }
-.clear-history{
+#clear-history{
     color: #136CB2;
     margin: 0px 0px 12px;
     font-size: 11px;
-    text-decoration: none;
+    cursor: pointer;
 }
-.clear-history:hover{
+#clear-history:hover{
     text-decoration: underline;
 }
 .history-img{
