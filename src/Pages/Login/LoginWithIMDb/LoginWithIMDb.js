@@ -9,6 +9,9 @@ export default function LoginWithIMDb(props) {
   const [emptyError, setEmptyError]=useState({usernameError:"", passwordError:""});
   const navigate=useNavigate();
 
+  const gotoHome=()=>{
+    navigate("/");
+  }
   const handleChangeLoginData=(e)=>{
     setLoginData((previousData)=>({...previousData, [e.target.name]:e.target.value}));
   }
@@ -64,37 +67,38 @@ export default function LoginWithIMDb(props) {
   return (
     <div className='signin-main-box'>
       <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
-          alt="imdblogo"
-          className="imdblogo-in-signin"
-        />
-        <div className='signin-container'> 
-          <h1>Sign in</h1>
-          <div className='signin-fields'>
-              <label for="email">Email</label>
-              <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
-              <p className={emptyError.usernameError!="" ? "empty-login-error" : "no-login-error"}>
-                {emptyError.usernameError}
-              </p>
-          </div>
-          <div className='signin-fields'>
-              <label for="password">Password</label>
-              <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
-              <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
-                {emptyError.passwordError}
-              </p>
-              <p className={loginError!="" ? "login-error" : "no-login-error" }>
-                {loginError}
-              </p>
-          </div>
-          <div className='signin-fields'>
-              <button className='signin' onClick={validataLogin}>Sign in</button>
-          </div>
-          <p id='text-with-line'><span>New to IMDb?</span></p>
-          <div className='signin-fields'>
-              <button className='create-new-acc-icon'>Create your IMDb account</button>
-          </div>
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+        alt="imdblogo"
+        className="imdblogo-in-signin"
+        onClick={gotoHome}
+      />
+      <div className='signin-container'> 
+        <h1>Sign in</h1>
+        <div className='signin-fields'>
+          <label for="email">Email</label>
+          <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
+          <p className={emptyError.usernameError!="" ? "empty-login-error" : "no-login-error"}>
+            {emptyError.usernameError}
+          </p>
         </div>
+        <div className='signin-fields'>
+          <label for="password">Password</label>
+          <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
+          <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
+            {emptyError.passwordError}
+          </p>
+          <p className={loginError!="" ? "login-error" : "no-login-error" }>
+            {loginError}
+          </p>
+        </div>
+        <div className='signin-fields'>
+          <button className='signin' onClick={validataLogin}>Sign in</button>
+        </div>
+        <p id='text-with-line'><span>New to IMDb?</span></p>
+        <div className='signin-fields'>
+          <button className='create-new-acc-icon'>Create your IMDb account</button>
+        </div>
+      </div>
     </div>
   )
 }

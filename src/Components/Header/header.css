@@ -9,6 +9,7 @@ header{
 .imdblogo{
     height: 35px;
     width: 70px;
+    cursor: pointer;
 }
 .header-btn{
     color: #fff !important;

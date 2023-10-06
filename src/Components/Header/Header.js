@@ -23,6 +23,10 @@ export default function Header(props) {
   const handleClose = () => setOpen(false);
   const navigate=useNavigate();
 
+  const gotoHome=()=>{
+    navigate("/");
+  }
+
   return (
     <div>
       <header>
@@ -30,6 +34,7 @@ export default function Header(props) {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
           alt="imdblogo"
           className="imdblogo"
+          onClick={gotoHome}
         />
         <div>
           <Button onClick={handleOpen} className="header-btn">
