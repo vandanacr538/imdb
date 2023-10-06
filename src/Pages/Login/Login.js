@@ -2,66 +2,15 @@ import React, { useState } from 'react'
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin} from '@react-oauth/google';
 import History from '../../Components/History/History';
+import google from "../../Assets/google.png";
 
-export default function Login(props) {
-  const [loginData, setLoginData]=useState({});
-  const [loginError, setLoginError]=useState("");
-  const [emptyError, setEmptyError]=useState({usernameError:"", passwordError:""});
+export default function Login() {
   const navigate=useNavigate();
 
-  const handleChangeLoginData=(e)=>{
-    setLoginData((previousData)=>({...previousData, [e.target.name]:e.target.value}));
-  }
-  const validataLogin=async()=>{
-    setLoginError("");
-    setEmptyError((previousValue)=>({...previousValue, 
-      usernameError:"",
-      passwordError:""
-    }));
-    if(Object.keys(loginData).length<=1 || loginData.username==="" || loginData.password===""){
-      if(Object.keys(loginData).length===0){
-        setEmptyError((previousValue)=>({...previousValue, 
-          usernameError:"",
-          passwordError:""
-        }));
-      }
-      if(loginData.username==="" || !("username" in loginData)){
-        setEmptyError((previousValue)=>({...previousValue, usernameError:"Enter your username or email"}));
-      }
-      else{
-        setEmptyError((previousValue)=>({...previousValue, usernameError:""}));
-      }
-      if(loginData.password==="" || !("password" in loginData)){
-        setEmptyError((previousValue)=>({...previousValue, passwordError:"Enter your password"}));
-      }
-      else{
-        setEmptyError((previousValue)=>({...previousValue, passwordError:""}));
-      }
-    } 
-    else{
-      try{
-        let result=await axios.post("http://localhost:8080/login/loginapi", loginData);
-        if(result.status===200){
-          localStorage.setItem("token", result.data.token);
-          props.setAuthButton("Sign Out");
-          navigate("/");
-        }
-      }
-      catch(e){
-        if(e.response.status===403){
-          console.log("403");
-          setLoginError(e.response.data.msg);
-        }
-        else if(e.response.status===401){
-          setLoginError(e.response.data.msg);
-        }
-        else{
-          setLoginError(e.response.data.msg);
-        }
-      }
-    }
+  const gotoLoginInWithIMDb=()=>{
+    navigate("/loginwithIMDb")
   }
   const sendToken=async(token)=>{
     const response=await axios.post("http://localhost:8080/login/oauth", {token:token.credential});
@@ -72,38 +21,47 @@ export default function Login(props) {
   }
 
   return (
-    <div className='signin-main-box'>
-        <div className='signin-container'>
-          <h1>Sign in</h1>
-          <div className='signin-fields'>
-              <label for="email">Email</label>
-              <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
-              <p className={emptyError.usernameError!="" ? "empty-login-error" : "no-login-error"}>
-                {emptyError.usernameError}
-              </p>
-          </div>
-          <div className='signin-fields'>
-              <label for="password">Password</label>
-              <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
-              <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
-                {emptyError.passwordError}
-              </p>
-              <p className={loginError!="" ? "login-error" : "no-login-error" }>
-                {loginError}
-              </p>
-          </div>
-          <div className='signin-fields'>
-              <button className='signin' onClick={validataLogin}>Sign in</button>
-          </div>
-          <div className='g-signin'>
+    <div className='all-signin-list-box'>
+        <div className='all-signin-container'>
+          <div className='all-signin-list'>
+            <h2>Sign in</h2>
+            <div className='sign-in-with-btn' onClick={gotoLoginInWithIMDb}>
+                <img className='sign-in-with-logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png' alt='imdb-logo'></img>
+                <span className='sign-in-with-text'>Sign in with IMDb</span>
+            </div>
+            <div className='sign-in-with-btn'>
+                <img className='sign-in-with-logo' src={google} alt='imdb-logo'></img>
+                <span className='sign-in-with-text'>Sign in with IMDb</span>
+            </div>
+            <div className='g-signin'>
             <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                sendToken(credentialResponse);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
+                  onSuccess={(credentialResponse) => {
+                    sendToken(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+            </div>
+          </div>
+          <div className='signin-page-details-side'>
+            <h2>Benefits of your free IMDb account</h2>
+            <div className='signin-page-detail'>
+              <strong>Personalized Recommendations</strong>
+              <p>Discover shows you'll love.</p>
+            </div>
+            <div className='signin-page-detail'>
+              <strong>Your Watchlist</strong>
+              <p>Track everything you want to watch and receive e-mail when movies open in theaters.</p>
+            </div>
+            <div className='signin-page-detail'>
+              <strong>Your Ratings</strong>
+              <p>Rate and remember everything you've seen.</p>
+            </div>
+            <div className='signin-page-detail'>
+              <strong>Contribute to IMDb</strong>
+              <p>Add data that will be seen by millions of people and get cool badges.</p>
+            </div>
           </div>
         </div>
         <div>

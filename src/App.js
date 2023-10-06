@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { KeyboardArrowUp } from '@mui/icons-material';
+import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
 
 function App() {
   const [authButton, setAuthButton]=useState("Sign In");
@@ -42,7 +43,8 @@ function App() {
       <Routes>
         <Route path='/' element={<MainComp/>}></Route>
         <Route path='/play/:id' element={<Play/>}></Route>
-        <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
+        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
       </Routes>
       <Footer/>
       </BrowserRouter>
