@@ -62,8 +62,13 @@ export default function LoginWithIMDb(props) {
     }
   }
   return (
-    <div>
-        <div className='signin-container'>
+    <div className='signin-main-box'>
+      <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+          alt="imdblogo"
+          className="imdblogo-in-signin"
+        />
+        <div className='signin-container'> 
           <h1>Sign in</h1>
           <div className='signin-fields'>
               <label for="email">Email</label>
@@ -84,6 +89,10 @@ export default function LoginWithIMDb(props) {
           </div>
           <div className='signin-fields'>
               <button className='signin' onClick={validataLogin}>Sign in</button>
+          </div>
+          <p id='text-with-line'><span>New to IMDb?</span></p>
+          <div className='signin-fields'>
+              <button className='create-new-acc-icon'>Create your IMDb account</button>
           </div>
         </div>
     </div>
