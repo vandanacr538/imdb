@@ -33,6 +33,18 @@
     border: 1px solid #a5a3a3;
     margin-top: 3px;
 }
+.empty-login-error{
+    margin: 5px 0px 0px;
+    font-size: 12px;
+    color: #c40000;
+}
+.login-error{
+    margin: 15px auto 0px;
+    color: #c40000;
+}
+.no-login-error{
+    display: none;
+}
 .signin{
     margin-top: 10px;
     height: 30px;
