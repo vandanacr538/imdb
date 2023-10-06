@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { KeyboardArrowUp } from '@mui/icons-material';
 import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
+import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayout';
 
 function App() {
   const [authButton, setAuthButton]=useState("Sign In");
@@ -38,15 +39,16 @@ function App() {
         Back to top
       </button>
       <BrowserRouter>
-      <Header authButton={authButton}/>
-      <Ad/>
       <Routes>
-        <Route path='/' element={<MainComp/>}></Route>
-        <Route path='/play/:id' element={<Play/>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
+        <Route path='/' element={<HeaderFooterLayout authButton={authButton}/>}>
+            <Route path='/' element={<MainComp/>}></Route>
+            <Route path='/play/:id' element={<Play/>}></Route>
+            <Route path='/login' element={<Login/>}></Route>
+        </Route>
+      </Routes>
+      <Routes>
         <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
       </Routes>
-      <Footer/>
       </BrowserRouter>
     </div>
     </GoogleOAuthProvider>
