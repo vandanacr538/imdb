@@ -2,20 +2,28 @@ import React, { useState } from 'react'
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin} from '@react-oauth/google';
 import History from '../../Components/History/History';
 import google from "../../Assets/google.png";
+import { useGoogleLogin } from '@react-oauth/google'; 
 
-export default function Login() {
+export default function Login(props) {
   const navigate=useNavigate();
 
   const gotoLoginInWithIMDb=()=>{
     navigate("/loginwithIMDb")
   }
+  const loginWithGoogle = useGoogleLogin({   
+    onSuccess: (credentialResponse) => {
+      console.log(credentialResponse);
+      sendToken(credentialResponse.access_token);
+    },
+    onError: (error) => console.log('Login Failed:', error)
+  });
   const sendToken=async(token)=>{
-    const response=await axios.post("http://localhost:8080/login/oauth", {token:token.credential});
+    const response=await axios.post("http://localhost:8080/login/oauth", {token:token});
     if(response.status===200 && response.data.msg==="Already verified user" || response.data.msg==="oauth successfull"){
       localStorage.setItem("token", response.data.token);
+      props.setAuthButton("Sign Out");
       navigate("/");
     }
   }
@@ -29,19 +37,9 @@ export default function Login() {
                 <img className='sign-in-with-logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png' alt='imdb-logo'></img>
                 <span className='sign-in-with-text'>Sign in with IMDb</span>
             </div>
-            <div className='sign-in-with-btn'>
+            <div className='sign-in-with-btn' onClick={loginWithGoogle}>
                 <img className='sign-in-with-logo' src={google} alt='imdb-logo'></img>
-                <span className='sign-in-with-text'>Sign in with IMDb</span>
-            </div>
-            <div className='g-signin'>
-            <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    sendToken(credentialResponse);
-                  }}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
+                <span className='sign-in-with-text'>Sign in with Google</span>
             </div>
           </div>
           <div className='signin-page-details-side'>
