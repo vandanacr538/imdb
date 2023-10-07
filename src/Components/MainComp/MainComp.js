@@ -5,12 +5,14 @@ import { Suspense, lazy } from 'react';
 import FallbackComp from '../FallbackComp/FallbackComp';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedLayout from '../ProtectedLayout/ProtectedLayout';
+import Ad from '../Advertisement/Ad';
 
 const Explore=lazy(()=>import('../Explore/Explore'));
 
 export default function MainComp() {
   return (
     <div>
+        <Ad/>
         <Main/>
         <h1 style={{color:"#f5c518", marginLeft:"49px"}}>What to watch</h1>
         <MovieCarousel heading="Top Picks" api="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1" auth="tmdb"></MovieCarousel>
