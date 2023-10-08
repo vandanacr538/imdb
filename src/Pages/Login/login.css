@@ -1,8 +1,11 @@
+.all-signin-list-page{
+    background-color: #d8d8d6;
+}
 .all-signin-list-box{
     background-color: #fff;
     width: 70%;
     margin: 0 auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
     color: #000;
 }
 .all-signin-container{
@@ -24,7 +27,7 @@
     flex-direction: column;
     align-items: center;
 }
-.sign-in-with-btn{
+.sign-in-with-btn, .signup-btn-in-signin{
     width: 230px;
     height: 35px;
     display: flex;
@@ -47,7 +50,7 @@
     padding: 10px 20px;
     box-sizing: border-box;
 }
-.sign-in-with-text{
+.sign-in-with-text, .signup-btn-text{
     font-size: 14px;
     font-weight: bold;
 }
@@ -62,5 +65,23 @@
 .g-signin{
     margin-top: 25px;
     display: flex;
+    justify-content: center;
+}
+#or-line{
+    /* margin: 20px auto 0px; */
+    width: 230px;
+    border-bottom: 1px solid #000;
+    height: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+#or-line span{
+    background-color: #fff;
+    padding: 0px 15px;
+    color: #000;
+}
+.signup-btn-in-signin{
+    background-color: #E4B721;
+    border: none;
     justify-content: center;
 }

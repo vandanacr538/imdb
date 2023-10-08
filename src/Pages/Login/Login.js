@@ -29,7 +29,8 @@ export default function Login(props) {
   }
 
   return (
-    <div className='all-signin-list-box'>
+    <div className='all-signin-list-page'>
+      <div className='all-signin-list-box'>
         <div className='all-signin-container'>
           <div className='all-signin-list'>
             <h2>Sign in</h2>
@@ -40,6 +41,10 @@ export default function Login(props) {
             <div className='sign-in-with-btn' onClick={loginWithGoogle}>
                 <img className='sign-in-with-logo' src={google} alt='imdb-logo'></img>
                 <span className='sign-in-with-text'>Sign in with Google</span>
+            </div>
+            <p id='or-line'><span>or</span></p>
+            <div className='signup-btn-in-signin' onClick={loginWithGoogle}>
+              <span className='signup-btn-text'>Create a New Account</span>
             </div>
           </div>
           <div className='signin-page-details-side'>
@@ -65,6 +70,7 @@ export default function Login(props) {
         <div>
           <History/>
         </div>
+      </div>
     </div>
   )
 }

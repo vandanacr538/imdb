@@ -5,6 +5,9 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 0px 5px 5px  #494949cc;
+    position: relative;
+    z-index: 2;
 }
 .imdblogo{
     height: 35px;
