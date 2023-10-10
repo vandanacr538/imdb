@@ -106,7 +106,7 @@ export default function CreateAccount() {
           </ul>
         </div>
       </div>
-      <div className="page-container">
+      <div className="page-container create-acc-container">
         <h1>Create account</h1>
         <div className='page-fields'>
           <label for="name">Your name</label>
@@ -125,8 +125,8 @@ export default function CreateAccount() {
           <label for="re-enter-password">Re-enter passsword</label>
           <input type='text' id='re-enter-password' className='page-input' name="re_enter_password" onChange={handleChangeCreateAccData}></input>
         </div>
-        <div className='page-task-complete-container'>
-            <button className='page-task-complete-btn' onClick={validateCreateAccount}>Create your IMDb account</button>
+        <div className='create-acc-btn-container'>
+            <button className='create-acc-btn' onClick={validateCreateAccount}>Create your IMDb account</button>
         </div>
         <div id="signin-link-div-in-createacc">
             Already have an account?

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import './loginwithIMDb.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './../../loginandcreateacc.css';
+import './loginwithIMDb.css';
 
 export default function LoginWithIMDb(props) {
   const [loginData, setLoginData]=useState({});
@@ -65,25 +66,25 @@ export default function LoginWithIMDb(props) {
     }
   }
   return (
-    <div className='signin-main-box'>
+    <div className='page-main-box'>
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
         alt="imdblogo"
-        className="imdblogo-in-signin"
+        className="imdb-logo"
         onClick={gotoHome}
       />
-      <div className='signin-container'> 
+      <div className='page-container signin-container'> 
         <h1>Sign in</h1>
-        <div className='signin-fields'>
+        <div className='page-fields'>
           <label for="email">Email</label>
-          <input type='text' id='email' className='signin-input' name="username" onChange={handleChangeLoginData}></input>
+          <input type='text' id='email' className='page-input' name="username" onChange={handleChangeLoginData}></input>
           <p className={emptyError.usernameError!="" ? "empty-login-error" : "no-login-error"}>
             {emptyError.usernameError}
           </p>
         </div>
-        <div className='signin-fields'>
+        <div className='page-fields'>
           <label for="password">Password</label>
-          <input type='text' id='password' className='signin-input' name="password" onChange={handleChangeLoginData}></input>
+          <input type='text' id='password' className='page-input' name="password" onChange={handleChangeLoginData}></input>
           <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
             {emptyError.passwordError}
           </p>
@@ -91,12 +92,12 @@ export default function LoginWithIMDb(props) {
             {loginError}
           </p>
         </div>
-        <div className='signin-fields'>
-          <button className='signin' onClick={validataLogin}>Sign in</button>
+        <div className='page-fields'>
+          <button className='signin-btn-signinpage' onClick={validataLogin}>Sign in</button>
         </div>
         <p id='text-with-line'><span>New to IMDb?</span></p>
-        <div className='signin-fields'>
-          <button className='create-new-acc-icon'>Create your IMDb account</button>
+        <div className='page-fields'>
+          <button className='create-new-acc-icon-signinpage'>Create your IMDb account</button>
         </div>
       </div>
     </div>
