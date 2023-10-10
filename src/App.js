@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { KeyboardArrowUp } from '@mui/icons-material';
 import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
 import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayout';
+import CreateAccount from './Pages/CreateAccount/CreateAccount';
 
 function App() {
   const [authButton, setAuthButton]=useState("Sign In");
@@ -45,6 +46,7 @@ function App() {
       </Routes>
       <Routes>
         <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
+        <Route path='/createaccount' element={<CreateAccount/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

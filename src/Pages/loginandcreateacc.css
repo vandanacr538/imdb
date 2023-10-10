@@ -1,0 +1,81 @@
+.page-main-box{
+    background-color: #fff;
+    width: 100%;
+    height: 100vh;
+    color: #000;
+    padding: 15px;
+    box-sizing: border-box;
+    font-family: Arial,sans-serif;
+}
+.imdb-logo{
+    width: 100px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.page-error-box{
+    border: 1px solid  #c40000;
+    width: 350px;
+    border-radius: 8px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: none;
+    align-items: flex-start;
+}
+#page-error-box-heading{
+    margin: 5px 10px;
+    color: #c40000;
+}
+.page-container{
+    width: 350px;
+    margin: 20px auto;
+    border-radius: 8px;
+    padding: 20px 25px;
+    box-sizing: border-box; 
+    border: 1px solid #ddd; 
+}
+.page-container h1{
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+}
+.page-fields{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+.page-fields label{
+    font-weight: bold;
+    font-size: 13px;
+}
+.page-input{
+    height: 31px;
+    border-radius: 3px;
+    border: none;
+    border: 1px solid #a5a3a3;
+    margin-top: 5px;
+    padding: 3px 7px;
+    box-sizing: border-box;
+}
+.page-input:focus{
+    background-color: #f3fafa;
+    box-shadow: 0 0 0 3px #c0eef7;
+    outline: 0;
+    border: 1px solid #424242;
+}
+.page-task-complete-container{
+    margin-top: 20px;
+}
+.page-task-complete-btn{
+    width: 100%;
+    height: 30px;
+    border-radius: 7px;
+    background-color: #ffd814;
+    border: none;
+    cursor: pointer;
+}
+.page-task-complete-btn:hover{
+    background-color:#f5c518;
+}

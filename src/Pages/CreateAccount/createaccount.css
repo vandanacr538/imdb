@@ -1,0 +1,37 @@
+.create-acc-error-list{
+    margin: 0;
+    padding-left: 30px;
+}
+.create-acc-error-list li{
+    font-size: 13px;
+    margin-top: 3px;
+}
+.page-container{
+    padding: 14px 18px;
+}
+.password-rule{
+    font-size: 12px;
+    margin: 5px 0px;
+}
+.page-task-complete-container{
+    height: 55px;
+    box-shadow: 4px 13px 16px -25px rgba(0, 0, 0, 0.78);
+}
+.page-task-complete-btn{
+    box-shadow: 0 7px 7px -7px rgba(0,0,0,0.3);
+}
+#signin-link-div-in-createacc{
+    font-size: 13px;
+    margin: 20px 0px 0px;
+    display: flex;
+    align-items: center;
+}
+#signin-link{
+    margin-left: 4px;
+    color: #0066c0;
+    display: flex;
+    cursor: pointer;
+}
+#signin-link:hover{
+    text-decoration: underline;
+}
