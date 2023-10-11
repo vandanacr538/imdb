@@ -25,17 +25,6 @@
     padding: 0px 5px;
     color: #767676;
 }
-.signin-btn-signinpage{
-    margin-top: 10px;
-    height: 30px;
-    border-radius: 7px;
-    background-color: #ffd814;
-    border: none;
-    cursor: pointer;
-}
-.signin-btn-signinpage:hover{
-    background-color:#f5c518;
-}
 .create-new-acc-icon-signinpage{
     margin-top: 10px;
     height: 30px;

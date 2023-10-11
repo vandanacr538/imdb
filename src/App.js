@@ -9,6 +9,7 @@ import { KeyboardArrowUp } from '@mui/icons-material';
 import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
 import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayout';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
+import OTPVerification from './Pages/OTPVerification/OTPVerification';
 
 function App() {
   const [authButton, setAuthButton]=useState("Sign In");
@@ -47,6 +48,7 @@ function App() {
       <Routes>
         <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
         <Route path='/createaccount' element={<CreateAccount/>}></Route>
+        <Route path='/otp_verification_to_create_acc' element={<OTPVerification/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

@@ -13,22 +13,9 @@
     font-size: 12px;
     margin: 5px 0px;
 }
-.create-acc-btn-container{
-    margin-top: 20px;
+.create-btn-with-shadow{
     height: 55px;
     box-shadow: 4px 13px 16px -25px rgba(0, 0, 0, 0.78);
-}
-.create-acc-btn{
-    width: 100%;
-    height: 30px;
-    border-radius: 7px;
-    background-color: #ffd814;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 7px 7px -7px rgba(0,0,0,0.3);
-}
-.create-acc-btn:hover{
-    background-color:#f5c518;
 }
 #signin-link-div-in-createacc{
     font-size: 13px;

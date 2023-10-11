@@ -92,8 +92,8 @@ export default function LoginWithIMDb(props) {
             {loginError}
           </p>
         </div>
-        <div className='page-fields'>
-          <button className='signin-btn-signinpage' onClick={validataLogin}>Sign in</button>
+        <div className='page-task-complete-btn-container'>
+          <button className='page-task-complete-btn' onClick={validataLogin}>Sign in</button>
         </div>
         <p id='text-with-line'><span>New to IMDb?</span></p>
         <div className='page-fields'>

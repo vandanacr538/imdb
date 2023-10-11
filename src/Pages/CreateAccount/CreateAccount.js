@@ -70,6 +70,7 @@ export default function CreateAccount() {
           }
           else{
             console.log(result.data.msg, "navigate to OTP Verification page");
+            navigate("/otp_verification_to_create_acc", {state:{createAccData}});
           }
         }
       }
@@ -125,8 +126,8 @@ export default function CreateAccount() {
           <label for="re-enter-password">Re-enter passsword</label>
           <input type='text' id='re-enter-password' className='page-input' name="re_enter_password" onChange={handleChangeCreateAccData}></input>
         </div>
-        <div className='create-acc-btn-container'>
-            <button className='create-acc-btn' onClick={validateCreateAccount}>Create your IMDb account</button>
+        <div className='page-task-complete-btn-container create-btn-with-shadow'>
+            <button className='page-task-complete-btn' onClick={validateCreateAccount}>Create your IMDb account</button>
         </div>
         <div id="signin-link-div-in-createacc">
             Already have an account?
