@@ -29,6 +29,9 @@ export default function Login(props) {
       navigate("/");
     }
   }
+  const gotoCreateAccPage=()=>{
+    navigate("/createaccount");
+  }
 
   return (
     <div className='all-signin-list-page'>
@@ -45,7 +48,7 @@ export default function Login(props) {
                 <span className='sign-in-with-text'>Sign in with Google</span>
             </div>
             <p id='or-line'><span>or</span></p>
-            <div className='signup-btn-in-signin' onClick={loginWithGoogle}>
+            <div className='signup-btn-in-signin' onClick={gotoCreateAccPage}>
               <span className='signup-btn-text'>Create a New Account</span>
             </div>
           </div>

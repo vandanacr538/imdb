@@ -13,6 +13,9 @@ export default function LoginWithIMDb(props) {
   const gotoHome=()=>{
     navigate("/");
   }
+  const gotoCreateAccPage=()=>{
+    navigate("/createaccount");
+  }
   const handleChangeLoginData=(e)=>{
     setLoginData((previousData)=>({...previousData, [e.target.name]:e.target.value}));
   }
@@ -97,7 +100,7 @@ export default function LoginWithIMDb(props) {
         </div>
         <p id='text-with-line'><span>New to IMDb?</span></p>
         <div className='page-fields'>
-          <button className='create-new-acc-icon-signinpage'>Create your IMDb account</button>
+          <button className='create-new-acc-icon-signinpage' onClick={gotoCreateAccPage}>Create your IMDb account</button>
         </div>
       </div>
     </div>
