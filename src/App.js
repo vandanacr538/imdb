@@ -12,14 +12,14 @@ import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import OTPVerification from './Pages/OTPVerification/OTPVerification';
 
 function App() {
-  const [authButton, setAuthButton]=useState("Sign In");
+  const [authButton, setAuthButton]=useState(false);
   const [displayBTTBtn, setDisplayBTTBtn]=useState("");
   const scrollToTop=()=>{
     window.scroll({top:0, behavior:"smooth"});
   }
   useEffect(()=>{
     if(localStorage.getItem("token")){
-      setAuthButton("Sign Out");
+      setAuthButton(true);
     }
     window.addEventListener("scroll", () => {
       if (window.scrollY > 1400) {
@@ -48,7 +48,7 @@ function App() {
       <Routes>
         <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
         <Route path='/createaccount' element={<CreateAccount/>}></Route>
-        <Route path='/otp_verification_to_create_acc' element={<OTPVerification/>}></Route>
+        <Route path='/otp_verification_to_create_acc' element={<OTPVerification setAuthButton={setAuthButton}/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

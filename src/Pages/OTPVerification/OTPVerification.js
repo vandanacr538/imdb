@@ -4,9 +4,8 @@ import "./otpverification.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Error } from '@mui/icons-material';
 import axios from 'axios';
-import { decodeToken } from 'react-jwt';
 
-export default function OTPVerification() {
+export default function OTPVerification(props) {
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] =useState("");
   const navigate=useNavigate();
@@ -28,9 +27,10 @@ export default function OTPVerification() {
         try{
             let result=await axios.post("http://localhost:8080/createaccount/verifyotp", {otp, email});
             if(result.status===200){
-                let newUserCreatedData=decodeToken(result.data.token);
-                console.log(result.data.msg);
-                console.log("Need to navigate to Home page with user created data");
+                console.log(result.data.token);
+                localStorage.setItem("token", result.data.token);
+                props.setAuthButton(true);
+                navigate("/");
             }
         }
         catch(e){

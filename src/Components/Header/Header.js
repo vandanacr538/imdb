@@ -3,6 +3,7 @@ import "./header.css";
 import { Box, Button, MenuItem, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import {
+  AccountCircle,
   BookmarkAdd,
   LocalMovies,
   Menu,
@@ -16,16 +17,25 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { decodeToken } from "react-jwt";
 
 export default function Header(props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [userProfileData, setUserProfileData]=useState("");
   const navigate=useNavigate();
 
   const gotoHome=()=>{
     navigate("/");
   }
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      let userDataDecoded=decodeToken(localStorage.getItem("token"));
+      setUserProfileData(userDataDecoded);
+      console.log(userProfileData);
+    }
+  }, [])
 
   return (
     <div>
@@ -178,7 +188,16 @@ export default function Header(props) {
           else{
             navigate("/login");
           }
-        }}>{props.authButton}</Button>
+        }}>
+          {props.authButton ? (
+            <>
+              <AccountCircle />
+              <span className="header-btn-text">{userProfileData.name}</span>
+            </>
+          ) : (
+            <>Sign In</>
+          )}
+        </Button>
         <select className="select-language">
           <option>English</option>
           <option>Italiano</option>
