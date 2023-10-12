@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import History from '../../Components/History/History';
 import google from "../../Assets/google.png";
 import { useGoogleLogin } from '@react-oauth/google'; 
+import { decodeToken } from 'react-jwt';
 
 export default function Login(props) {
   const navigate=useNavigate();
@@ -20,10 +21,11 @@ export default function Login(props) {
     onError: (error) => console.log('Login Failed:', error)
   });
   const sendToken=async(token)=>{
-    const response=await axios.post("http://localhost:8080/login/oauth", {token:token});
-    if(response.status===200 && response.data.msg==="Already verified user" || response.data.msg==="oauth successfull"){
-      localStorage.setItem("token", response.data.token);
-      props.setAuthButton("Sign Out");
+    const result=await axios.post("http://localhost:8080/login/oauth", {token:token});
+    if(result.status===200 && result.data.msg==="Already verified user" || result.data.msg==="oauth successfull"){
+      localStorage.setItem("token", result.data.token);
+      console.log(decodeToken(result.data.token))
+      props.setAuthButton(true);
       navigate("/");
     }
   }

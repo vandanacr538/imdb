@@ -32,8 +32,9 @@ export default function Header(props) {
   useEffect(()=>{
     if(localStorage.getItem("token")){
       let userDataDecoded=decodeToken(localStorage.getItem("token"));
+      console.log(userDataDecoded);
       setUserProfileData(userDataDecoded);
-      console.log(userProfileData);
+      // window.location.reload();
     }
   }, [])
 

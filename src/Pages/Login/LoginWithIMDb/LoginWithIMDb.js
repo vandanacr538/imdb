@@ -7,7 +7,7 @@ import './loginwithIMDb.css';
 export default function LoginWithIMDb(props) {
   const [loginData, setLoginData]=useState({});
   const [loginError, setLoginError]=useState("");
-  const [emptyError, setEmptyError]=useState({usernameError:"", passwordError:""});
+  const [emptyError, setEmptyError]=useState({emailError:"", passwordError:""});
   const navigate=useNavigate();
 
   const gotoHome=()=>{
@@ -19,21 +19,21 @@ export default function LoginWithIMDb(props) {
   const validataLogin=async()=>{
     setLoginError("");
     setEmptyError((previousValue)=>({...previousValue, 
-      usernameError:"",
+      emailError:"",
       passwordError:""
     }));
-    if(Object.keys(loginData).length<=1 || loginData.username==="" || loginData.password===""){
+    if(Object.keys(loginData).length<=1 || loginData.email==="" || loginData.password===""){
       if(Object.keys(loginData).length===0){
         setEmptyError((previousValue)=>({...previousValue, 
-          usernameError:"",
+          emailError:"",
           passwordError:""
         }));
       }
-      if(loginData.username==="" || !("username" in loginData)){
-        setEmptyError((previousValue)=>({...previousValue, usernameError:"Enter your username or email"}));
+      if(loginData.email==="" || !("email" in loginData)){
+        setEmptyError((previousValue)=>({...previousValue, emailError:"Enter your email"}));
       }
       else{
-        setEmptyError((previousValue)=>({...previousValue, usernameError:""}));
+        setEmptyError((previousValue)=>({...previousValue, emailError:""}));
       }
       if(loginData.password==="" || !("password" in loginData)){
         setEmptyError((previousValue)=>({...previousValue, passwordError:"Enter your password"}));
@@ -47,7 +47,7 @@ export default function LoginWithIMDb(props) {
         let result=await axios.post("http://localhost:8080/login/loginapi", loginData);
         if(result.status===200){
           localStorage.setItem("token", result.data.token);
-          props.setAuthButton("Sign Out");
+          props.setAuthButton(true);
           navigate("/");
         }
       }
@@ -77,9 +77,9 @@ export default function LoginWithIMDb(props) {
         <h1>Sign in</h1>
         <div className='page-fields'>
           <label for="email">Email</label>
-          <input type='text' id='email' className='page-input' name="username" onChange={handleChangeLoginData}></input>
-          <p className={emptyError.usernameError!="" ? "empty-login-error" : "no-login-error"}>
-            {emptyError.usernameError}
+          <input type='text' id='email' className='page-input' name="email" onChange={handleChangeLoginData}></input>
+          <p className={emptyError.emailError!="" ? "empty-login-error" : "no-login-error"}>
+            {emptyError.emailError}
           </p>
         </div>
         <div className='page-fields'>
