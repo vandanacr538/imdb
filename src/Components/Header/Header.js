@@ -36,7 +36,7 @@ export default function Header(props) {
       setUserProfileData(userDataDecoded);
       // window.location.reload();
     }
-  }, [])
+  }, [props.authButton])
 
   return (
     <div>
