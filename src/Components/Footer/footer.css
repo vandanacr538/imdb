@@ -32,15 +32,6 @@ footer{
 .footer-sm-link:hover{
     background-color: #3b3b3b;
 }
-.footer-menu{
-    width: 60%;
-    margin: 0 auto;
-}
-.footer-menu a{
-    color: #fff;
-    display: inline-block;
-    margin: 20px 10px 10px;
-}
 .footer-copyright{
     font-size: 13px;
     color: rgba(255,255,255,0.7);
