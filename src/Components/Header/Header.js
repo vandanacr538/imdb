@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./header.css";
 import { Box, Button, MenuItem, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   AccountCircle,
+  ArrowDropDown,
   BookmarkAdd,
   LocalMovies,
   Menu,
@@ -24,10 +25,28 @@ export default function Header(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [userProfileData, setUserProfileData]=useState("");
+  const [userDropDown, setUserDropDown]=useState(false);
   const navigate=useNavigate();
-
+  const ref=useRef();
   const gotoHome=()=>{
     navigate("/");
+  }
+  const displayUserProfileDropDown=()=>{
+    if(localStorage.getItem("token")){
+      setUserDropDown(!userDropDown);
+    }
+    else{
+      navigate("/login");
+    }
+  }
+  const signOut=(event)=>{
+    event.stopPropagation();
+    if(localStorage.getItem("token")){
+      localStorage.removeItem("token");
+      setUserDropDown(!userDropDown);
+      Cookies.remove("history");
+      window.location.reload();
+    }
   }
   useEffect(()=>{
     if(localStorage.getItem("token")){
@@ -179,24 +198,23 @@ export default function Header(props) {
           <BookmarkAdd/>
           <span className="header-btn-text">Watchlist</span>
         </Button>
-        <Button className="header-btn"
-        onClick={()=>{
-          if(localStorage.getItem("token")){
-            localStorage.removeItem("token");
-            Cookies.remove("history");
-            window.location.reload();
-          }
-          else{
-            navigate("/login");
-          }
-        }}>
+        <Button className="header-btn" onClick={displayUserProfileDropDown}>
           {props.authButton ? (
             <>
               <AccountCircle />
               <span className="header-btn-text">{userProfileData.name}</span>
+              <ArrowDropDown/>
+              <div className={userDropDown ? "user-profile-dropdown" : "no-user-profile-dropdown"} id="user-dropdown">
+                <label>
+                  <ul>
+                    <li>Account Settings</li>
+                    <li onClick={signOut}>Sign Out</li>
+                  </ul>
+                </label>
+              </div>
             </>
           ) : (
-            <>Sign In</>
+            <span>Sign In</span>
           )}
         </Button>
         <select className="select-language">

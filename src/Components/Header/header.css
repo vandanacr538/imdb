@@ -28,6 +28,33 @@ header{
     margin-left: 5px;
     line-height: 100%;
 }
+.user-profile-dropdown{
+    background-color: #272525;
+    display: block;
+    width: 180px;
+    font-size: 15px;
+    text-align: left;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    display: block;
+}
+.user-profile-dropdown ul{
+    list-style: none;
+    padding: 0px;
+}
+.user-profile-dropdown li{
+    padding: 10px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.user-profile-dropdown li:hover{
+    background-color: #3b3b3b;
+}
+.no-user-profile-dropdown{
+    display: none;
+}
 .menu-box{
     position:absolute;
     width: 100vw;
