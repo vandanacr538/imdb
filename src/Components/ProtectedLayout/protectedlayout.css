@@ -1,12 +1,12 @@
-.unauth{
+.empty-watchlist{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.unauth p{
+.empty-watchlist p{
     margin:10px 0px 0px;
 }
-.signin-btn{
+.btn-empty-watchlist{
     margin: 35px;
     background-color: #3b3b3b;
     border: none;
@@ -18,6 +18,6 @@
     font-size: 14px;  
     cursor: pointer;
 }
-.signin-btn:hover{
+.btn-empty-watchlist:hover{
     background-color: hsla(0, 0%, 23%, 0.733);
 }

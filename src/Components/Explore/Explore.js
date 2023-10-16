@@ -38,7 +38,7 @@ export default function Explore() {
   };
 
   return (
-    <div>
+    <div id="explore">
       <h1 style={{color:"#f5c518", marginLeft:"49px"}}>Explore what's streaming</h1>
       <Box sx={{margin:"0px 50px"}}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
