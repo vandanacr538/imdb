@@ -19,6 +19,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { decodeToken } from "react-jwt";
+import axios from "axios";
 
 export default function Header(props) {
   const [open, setOpen] = useState(false);
@@ -45,15 +46,23 @@ export default function Header(props) {
       localStorage.removeItem("token");
       setUserDropDown(!userDropDown);
       Cookies.remove("history");
+      navigate("/");
       window.location.reload();
+    }
+  }
+  const getUserData=async()=>{
+    try{
+      let userDataDecoded=decodeToken(localStorage.getItem("token"));
+      const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata", userDataDecoded);
+      setUserProfileData(decodeToken(result.data.token));
+    }
+    catch(e){
+      console.log(e);
     }
   }
   useEffect(()=>{
     if(localStorage.getItem("token")){
-      let userDataDecoded=decodeToken(localStorage.getItem("token"));
-      console.log(userDataDecoded);
-      setUserProfileData(userDataDecoded);
-      // window.location.reload();
+      getUserData();
     }
   }, [props.authButton])
 
@@ -207,7 +216,7 @@ export default function Header(props) {
               <div className={userDropDown ? "user-profile-dropdown" : "no-user-profile-dropdown"} id="user-dropdown">
                 <label>
                   <ul>
-                    <li>Account Settings</li>
+                    <li onClick={()=>navigate("/accountsettings")}>Account Settings</li>
                     <li onClick={signOut}>Sign Out</li>
                   </ul>
                 </label>

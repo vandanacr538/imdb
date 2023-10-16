@@ -10,6 +10,7 @@ import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
 import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayout';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import OTPVerification from './Pages/OTPVerification/OTPVerification';
+import AccountSettings from './Pages/AccountSettings/AccountSettings';
 
 function App() {
   const [authButton, setAuthButton]=useState(false);
@@ -43,6 +44,7 @@ function App() {
             <Route path='/' element={<MainComp/>}></Route>
             <Route path='/play/:id' element={<Play/>}></Route>
             <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
+            <Route path='/accountsettings' element={<AccountSettings setAuthButton={setAuthButton}/>}></Route>
         </Route>
       </Routes>
       <Routes>
