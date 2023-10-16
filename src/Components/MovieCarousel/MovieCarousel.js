@@ -3,6 +3,7 @@ import "./moviecarousel.css";
 import {
   Add,
   Bookmark,
+  Done,
   NavigateBefore,
   NavigateNext,
   PlayArrow,
@@ -20,6 +21,7 @@ export default function MovieCarousel(props) {
   const handleClose = () => setOpen(false);
   const [value, setValue] = useState(0);
   const [keys, setKeys]=useState();
+  const [watchlistItems, setWatchlistItems] = useState([]);
 
   const handleClickBackward = () => {
     cardElement.current.scrollBy({
@@ -47,14 +49,50 @@ export default function MovieCarousel(props) {
       );
       if(response.status===200){
         window.location.reload();
-        alert(response.data.msg);
       }
     }
     catch(e){
       console.log(e);
     }
   }
-   
+  const removeFromWatchlist=async(element)=>{
+    try{
+      const res = await axios.delete(
+        "http://localhost:8080/watchlist/deletemoviefromwatchlist", 
+        { data: { element }, 
+          headers: {
+            Authorization:localStorage.getItem("token"),
+          }, 
+        }
+      );
+      if(res.status===200){
+        getWatchlistItems();
+        window.location.reload();
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+    
+  }
+  const getWatchlistItems=async()=>{
+    try{
+      const res = await axios.get(
+        "http://localhost:8080/watchlist/mywatchlist",
+        {
+          headers: {
+            Authorization:localStorage.getItem("token"),
+          },
+        }
+      );
+      setWatchlistItems(res.data.results.map((elem)=>{
+        return Number(elem.id);
+      }))
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
   const getMovies = async () => {
     if(props.auth==="own"){
       const res = await axios.get(
@@ -100,7 +138,6 @@ export default function MovieCarousel(props) {
             return filteredElement.type==="Trailer" && filteredElement.name==="Official Trailer";
           });
         });
-        console.log(final);
         const movieKeysArr=final.map((elem)=>{
           if(elem.length!=0){
             if(elem[0].hasOwnProperty("key")){
@@ -111,8 +148,8 @@ export default function MovieCarousel(props) {
             return "random";
           }
         });
-        console.log(movieKeysArr);
-        console.log(movieKeysArr[1]);
+        // console.log(movieKeysArr);
+        // console.log(movieKeysArr[1]);
         setKeys(movieKeysArr);
       });
 
@@ -120,6 +157,9 @@ export default function MovieCarousel(props) {
   };
   useEffect(() => {
     getMovies();
+    if(localStorage.getItem("token")){
+      getWatchlistItems();
+    }
   }, []);
 
   return (
@@ -143,12 +183,26 @@ export default function MovieCarousel(props) {
             return (
               <>
                 <div className="card">
-                  <div className="overlay-icon" onClick={()=>{addToWatchlist(element)}}>
-                    <Bookmark className="overlay-bookmark" />
-                    <div className="overlay-add-icon">
-                      <Add />
+                  {watchlistItems?.includes(element.id) ? (
+                    <div className="overlay-icon" onClick={() => {removeFromWatchlist(element);}}>
+                      <Bookmark className="overlay-bookmark-done" />
+                      <div className="overlay-add-done-icon">
+                        <Done style={{ color: "#000" }} />
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div
+                      className="overlay-icon"
+                      onClick={() => {
+                        addToWatchlist(element);
+                      }}
+                    >
+                      <Bookmark className="overlay-bookmark-add" />
+                      <div className="overlay-add-done-icon">
+                        <Add />
+                      </div>
+                    </div>
+                  )}
                   <img src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}></img>
                   <div className="card-movie-details">
                     <div className="rating-container">
