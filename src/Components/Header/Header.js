@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import { Box, Button, MenuItem, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,10 +27,35 @@ export default function Header(props) {
   const handleClose = () => setOpen(false);
   const [userProfileData, setUserProfileData]=useState("");
   const [userDropDown, setUserDropDown]=useState(false);
+  const {watchlistMoviesCount, setWatchlistMoviesCount} = props;
   const navigate=useNavigate();
-  const ref=useRef();
   const gotoHome=()=>{
     navigate("/");
+  }
+  const getWatchlistCount=async()=>{
+    try{
+      const res = await axios.get(
+        "http://localhost:8080/watchlist/mywatchlist",
+        {
+          headers: {
+            Authorization:localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(res.data.results.length);
+      setWatchlistMoviesCount(res.data.results.length);
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
+  const gotoWatchlistPage=()=>{
+    if(localStorage.getItem("token")){
+      navigate("/watchlist");
+    }
+    else{
+      navigate("/login");
+    }
   }
   const displayUserProfileDropDown=()=>{
     if(localStorage.getItem("token")){
@@ -63,6 +88,7 @@ export default function Header(props) {
   useEffect(()=>{
     if(localStorage.getItem("token")){
       getUserData();
+      getWatchlistCount();
     }
   }, [props.authButton])
 
@@ -203,9 +229,15 @@ export default function Header(props) {
             <Search sx={{ cursor: "pointer", color: "#5c5a5a" }} />
           </div>
         </div>
-        <Button className="header-btn">
+        <Button className="header-btn" onClick={gotoWatchlistPage}>
           <BookmarkAdd/>
-          <span className="header-btn-text">Watchlist</span>
+          <span className="header-btn-text">Watchlist
+            {watchlistMoviesCount > 0 ? (
+              <span className="wachlist-count-in-header">{watchlistMoviesCount}</span>
+            ) : (
+              <></>
+            )}
+          </span>
         </Button>
         <Button className="header-btn" onClick={displayUserProfileDropDown}>
           {props.authButton ? (

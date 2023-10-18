@@ -28,6 +28,17 @@ header{
     margin-left: 5px;
     line-height: 100%;
 }
+.wachlist-count-in-header{
+    background-color: #f5c518;
+    margin-left: 10px;
+    color: #000;
+    width: 20px;
+    height: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px
+}
 .user-profile-dropdown{
     background-color: #272525;
     display: block;

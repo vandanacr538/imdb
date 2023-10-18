@@ -11,10 +11,12 @@ import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayo
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import OTPVerification from './Pages/OTPVerification/OTPVerification';
 import AccountSettings from './Pages/AccountSettings/AccountSettings';
+import Watchlist from './Pages/Wactchlist/Watchlist';
 
 function App() {
   const [authButton, setAuthButton]=useState(false);
   const [displayBTTBtn, setDisplayBTTBtn]=useState("");
+  const [watchlistMoviesCount, setWatchlistMoviesCount] = useState([]);
   const scrollToTop=()=>{
     window.scroll({top:0, behavior:"smooth"});
   }
@@ -40,17 +42,18 @@ function App() {
       </button>
       <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HeaderFooterLayout authButton={authButton}/>}>
+        <Route path='/' element={<HeaderFooterLayout authButton={authButton} watchlistMoviesCount={watchlistMoviesCount} setWatchlistMoviesCount={setWatchlistMoviesCount}/>}>
             <Route path='/' element={<MainComp/>}></Route>
             <Route path='/play/:id' element={<Play/>}></Route>
             <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
             <Route path='/accountsettings' element={<AccountSettings setAuthButton={setAuthButton}/>}></Route>
+            <Route path='/watchlist' element={<Watchlist setWatchlistMoviesCount={setWatchlistMoviesCount}/>}></Route>
         </Route>
       </Routes>
       <Routes>
         <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
         <Route path='/createaccount' element={<CreateAccount/>}></Route>
-        <Route path='/otp_verification_to_create_acc' element={<OTPVerification setAuthButton={setAuthButton}/>}></Route>
+        <Route path='/otp_verification_to_create_acc' element={<OTPVerification watchlistMoviesCount={watchlistMoviesCount} setAuthButton={setAuthButton}/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

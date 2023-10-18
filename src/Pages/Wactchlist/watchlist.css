@@ -1,0 +1,143 @@
+.watchlist-page{
+    background-color: #d8d8d6;
+}
+.watchlist-page-box{
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    color: #000;
+    padding: 20px 20px 80px;
+    box-sizing: border-box;
+}
+.watchlist-page-box h2{
+    font-size: 23px;
+    margin: 10px 0px;
+}
+#watchlist-page-bar{
+    border: 1px solid #d1cfcf;
+}
+.watchlist-page-container{
+    position: relative;
+    margin-top: 10px;
+    height: 100%;
+}
+.watchlist-cards{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dotted #888;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    position: relative;
+}
+.watchlist-page-overlay-icon-box{
+    width: 47px;
+    height: auto;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -12px;
+    top: 6px;
+    cursor: pointer;
+}   
+.watchlist-page-overlay-add-bookmark{
+    font-size: 40px !important;
+    color:hsla(0, 1%, 44%, 0.562) !important;
+}
+.watchlist-page-overlay-add-bookmark:hover{
+    color:hsla(0, 1%, 44%, 0.836)  !important;
+}
+.watchlist-page-overlay-done-bookmark{
+    font-size: 40px !important;
+    color: hsla(69, 73%, 69%, 0.808)!important;
+}
+.watchlist-page-overlay-done-bookmark:hover{
+    color: hsla(69, 73%, 69%, 0.678) !important;
+}
+.watchlist-page-overlay-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+}
+.movie-img-in-wacthlist-page{
+    width: 80px;
+    height: 110px;
+}
+.watchlist-card-details{
+    margin-left: 20px;
+}
+.watchlist-card-heading{
+    margin: 2px auto;
+    font-size: 15px;
+    color: #0066c0;
+    cursor: pointer;
+    text-decoration: none;
+}
+.watchlist-card-heading:hover{
+    text-decoration: underline;
+}
+.rating-in-watchlist-page{
+    display: flex;
+    align-items: center;
+}
+.watchlist-card-details p{
+    margin: 2px 0px;
+    font-size: 12px;
+    text-align: justify;
+}
+.watchlist-card-release-date{
+    color: #888;
+}
+.empty-watchlist-page-content{
+    margin: 100px auto 10px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.watchlist-add-icon-box{
+    width: 80px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.watchlist-add-icon-bookmark{
+    font-size: 80px !important;
+    color:hsla(0, 1%, 44%, 0.562) !important;
+}
+.watchlist-add-icon-bookmark:hover{
+    color:hsla(0, 1%, 44%, 0.836)  !important;
+}
+.watchlist-add-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 15px;
+}
+#empty-watchlist-description,.empty-watchlist-page-content h4{
+    margin: 30px auto 0px;
+    text-align: center;
+}
+#empty-watchlist-description{
+    color: #888;
+}
+.wactchlist-page-browse-link{
+    margin: 10px auto;
+    text-decoration: none;
+    color: #0066c0;
+    font-size: 14px;
+}
+.wactchlist-page-browse-link:hover{
+    text-decoration: underline;
+}
+.watchlist-page-loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
