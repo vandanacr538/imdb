@@ -125,7 +125,7 @@ header{
     margin-left: 12%;
 }
 .menu-links{
-    cursor: pointer;
+    cursor: default;
 }
 .search-container{
     display: flex;

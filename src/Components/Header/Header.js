@@ -127,14 +127,14 @@ export default function Header(props) {
                     <h2>Movies</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
-                    <p className="menu-links">Item4</p>
-                    <p className="menu-links">Item5</p>
-                    <p className="menu-links">Item6</p>
-                    <p className="menu-links">Item7</p>
-                    <p className="menu-links">Item8</p>
+                    <p className="menu-links">Release Calender</p>
+                    <p className="menu-links">Top 250 Movies</p>
+                    <p className="menu-links">Most Popular Movies</p>
+                    <p className="menu-links">Browse Movies by Genre</p>
+                    <p className="menu-links">Top Box Office</p>
+                    <p className="menu-links">Showtimes & Tickets</p>
+                    <p className="menu-links">Movie News</p>
+                    <p className="menu-links">India Movie Spotlight</p>
                   </div>
                 </div>
                 <div className="menu-box-container">
@@ -145,11 +145,11 @@ export default function Header(props) {
                     <h2>TV Shows</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
-                    <p className="menu-links">Item4</p>
-                    <p className="menu-links">Item5</p>
+                    <p className="menu-links">What's on TV & Streaming</p>
+                    <p className="menu-links">Top 250 TV Shows</p>
+                    <p className="menu-links">Most Popular TV Shows</p>
+                    <p className="menu-links">Browse TV Shows by Genre</p>
+                    <p className="menu-links">TV News</p>
                   </div>
                 </div>
                 <div className="menu-box-container">
@@ -160,11 +160,11 @@ export default function Header(props) {
                     <h2>Watch</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
-                    <p className="menu-links">Item4</p>
-                    <p className="menu-links">Item5</p>
+                    <p className="menu-links">What to Watch</p>
+                    <p className="menu-links">Latest Trailers</p>
+                    <p className="menu-links">IMDb Originals</p>
+                    <p className="menu-links">IMDb Picks</p>
+                    <p className="menu-links">IMDb Podcasts</p>
                   </div>
                 </div>
                 <div className="menu-box-container">
@@ -175,13 +175,13 @@ export default function Header(props) {
                     <h2>Awards & Events</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
-                    <p className="menu-links">Item4</p>
-                    <p className="menu-links">Item5</p>
-                    <p className="menu-links">Item6</p>
-                    <p className="menu-links">Item7</p>
+                    <p className="menu-links">Oscars</p>
+                    <p className="menu-links">Emmys</p>
+                    <p className="menu-links">Hallowen Picks</p>
+                    <p className="menu-links">Scary Good Horror</p>
+                    <p className="menu-links">Hispanic Heritage Month</p>
+                    <p className="menu-links">MAMI</p>
+                    <p className="menu-links">All Events</p>
                   </div>
                 </div>
                 <div className="menu-box-container">
@@ -192,9 +192,9 @@ export default function Header(props) {
                     <h2>Celebs</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
+                    <p className="menu-links">Born Today</p>
+                    <p className="menu-links">Most Popular Celebs</p>
+                    <p className="menu-links">Celebrity News</p>
                   </div>
                 </div>
                 <div className="menu-box-container">
@@ -205,9 +205,9 @@ export default function Header(props) {
                     <h2>Community</h2>
                   </div>
                   <div className="menu-links-container">
-                    <p className="menu-links">Item1</p>
-                    <p className="menu-links">Item2</p>
-                    <p className="menu-links">Item3</p>
+                    <p className="menu-links">Help Center</p>
+                    <p className="menu-links">Contributor Zone</p>
+                    <p className="menu-links">Polls</p>
                   </div>
                 </div>
               </div>
