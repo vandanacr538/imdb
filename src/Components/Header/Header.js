@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./header.css";
-import { Box, Button, MenuItem, Modal } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   AccountCircle,
@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { decodeToken } from "react-jwt";
 import axios from "axios";
+let historyItems=[];
 
 export default function Header(props) {
   const [open, setOpen] = useState(false);
@@ -28,9 +29,68 @@ export default function Header(props) {
   const [userProfileData, setUserProfileData]=useState("");
   const [userDropDown, setUserDropDown]=useState(false);
   const {watchlistMoviesCount, setWatchlistMoviesCount} = props;
+  const [allMoviesList, setAllMoviesList] = useState();
+  const [searchOutputArr, setSearchOutputArr] = useState([]);
+  const [noSearchData, setNoSearchData] = useState(false);
   const navigate=useNavigate();
   const gotoHome=()=>{
     navigate("/");
+  }
+  const getAllMoviesList=async()=>{
+    const res = await axios.get(
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
+        },
+      }
+    );
+    setAllMoviesList(res.data.results);
+  }
+  const searchMovie=async(e)=>{
+    setNoSearchData(false);
+    setSearchOutputArr([]);
+    if(e.target.value===""){
+      return;
+    }
+    else{
+      const searchedData=allMoviesList.filter((element)=>{
+        return element.original_title.toString().toUpperCase().includes(e.target.value.toString().toUpperCase());
+      });
+      if(searchedData.length>0){
+        setSearchOutputArr(searchedData);
+      }
+      else{
+        setNoSearchData(true);
+      }
+    }
+  }
+  const debounce=(func, timeout)=>{
+    let timer;
+    return function(...args){
+        clearTimeout(timer);
+        timer=setTimeout(()=>{
+            func.apply(this, args);
+        }, timeout)
+    }
+  }
+  const handleChangeSearch=debounce(searchMovie, 300);
+  const handleClickVideo=(elem)=>{
+    if(Cookies.get("history")){
+      const oldItems=JSON.parse(Cookies.get("history"));
+      historyItems.push(...oldItems, {poster_path:elem.poster_path});
+    }
+    else{
+      historyItems.push({poster_path:elem.poster_path});
+      console.log(historyItems)
+    }
+    Cookies.set("history", JSON.stringify(historyItems));
+    navigate("/play/" + elem.id);
+    setNoSearchData(false);
+    setSearchOutputArr([]);
+    document.querySelector(".search-input").value="";
   }
   const getWatchlistCount=async()=>{
     try{
@@ -90,6 +150,7 @@ export default function Header(props) {
       getUserData();
       getWatchlistCount();
     }
+    getAllMoviesList();
   }, [props.authButton])
 
   return (
@@ -215,19 +276,30 @@ export default function Header(props) {
           </Modal>
         </div>
         <div className="search-container">
-          <select className="search-select">
-            <option>All</option>
-            <option>Titles</option>
-            <option>TV Episodes</option>
-          </select>
           <div className="search-box">
             <input
               className="search-input"
               type="text"
               placeholder="Search IMDb"
+              onKeyUp={handleChangeSearch}
             ></input>
             <Search sx={{ cursor: "pointer", color: "#5c5a5a" }} />
           </div>
+            {searchOutputArr.length>0?(
+              <div class="search-output">
+                {searchOutputArr?.map((element)=>{
+                  return (
+                  <div className="search-output-card" onClick={()=>handleClickVideo(element)}>
+                    <img src={`https://image.tmdb.org/t/p/w185/` + element.poster_path} className="img-search-output"></img>
+                    <div>
+                     <p>{element.original_title}</p>
+                     <p>{element.overview}</p>
+                    </div>
+                  </div>
+                  )
+                })}
+              </div>
+            ):(<div id='no-data-found' style={{display:noSearchData?"block":""}}><p>No data found!</p></div>)}
         </div>
         <Button className="header-btn" onClick={gotoWatchlistPage}>
           <BookmarkAdd/>

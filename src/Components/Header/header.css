@@ -130,20 +130,15 @@ header{
 .search-container{
     display: flex;
     height: 35px; 
-    width: 45%;
-    border-radius: 5px;
-}
-.search-select{
-    background-color: #fff;
-    height: 100%;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
+    width: 50%;
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: inherit;
 }
 .search-box{
     background-color: #fff;
     height: 100%;
-    width: 80%;
+    width: 100%;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -153,9 +148,41 @@ header{
 }
 .search-input{
     border: none;
+    width: 90%;
+    height: 25px;
+    border: none;
+    background-color: inherit;
 }
-.search-input:focus, .search-select:focus{
+.search-input:focus{
     outline: none;
+}
+.search-output{
+    background-color: inherit;
+    padding: 5px 5px 10px;
+    box-sizing: border-box;
+}
+.search-output-card{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-bottom: 1px solid #888;
+}
+.img-search-output{
+    width: 70px;
+    height: 90px;
+    margin-right: 10px;
+}
+.search-output-card p{
+    font-size: 12px;
+}
+#no-data-found{
+    font-size: 15px;
+    background-color: inherit;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: none;
 }
 .select-language{
     height: 35px;
@@ -171,4 +198,3 @@ header{
 .select-language:hover{
     background-color: #272525;
 }
-
