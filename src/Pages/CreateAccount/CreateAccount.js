@@ -44,6 +44,12 @@ export default function CreateAccount() {
         setErrorsArray((previousData)=>([...previousData, "Passwords must match"]));
         setIsAllDataValid(false);
       }
+      else if(createAccData.password!=""){
+        if(createAccData.password.length<8){
+          setErrorsArray((previousData)=>([...previousData, "Passwords must be at least 8 characters"]));
+          setIsAllDataValid(false);
+        }
+      }
       else{
         setIsAllDataValid(true);
       }
@@ -119,19 +125,19 @@ export default function CreateAccount() {
         </div>
         <div className='page-fields'>
           <label for="password">Password</label>
-          <input type='text' id='password' className='page-input' name="password" placeholder="at least 8 characters" onChange={handleChangeCreateAccData}></input>
+          <input type='password' id='password' className='page-input' name="password" placeholder="at least 8 characters" onChange={handleChangeCreateAccData}></input>
           <p className="password-rule">Passwords must be at least 8 characters.</p>
         </div>
         <div className='page-fields'>
           <label for="re-enter-password">Re-enter passsword</label>
-          <input type='text' id='re-enter-password' className='page-input' name="re_enter_password" onChange={handleChangeCreateAccData}></input>
+          <input type='password' id='re-enter-password' className='page-input' name="re_enter_password" onChange={handleChangeCreateAccData}></input>
         </div>
         <div className='page-task-complete-btn-container create-btn-with-shadow'>
             <button className='page-task-complete-btn' onClick={validateCreateAccount}>Create your IMDb account</button>
         </div>
         <div id="signin-link-div-in-createacc">
             Already have an account?
-            <div id="signin-link">Sign in<ArrowRight style={{fontSize:"15px"}}/></div>
+            <div id="signin-link" onClick={()=>navigate("/loginwithIMDb")}>Sign in<ArrowRight style={{fontSize:"15px"}}/></div>
         </div>
       </div>
     </div>

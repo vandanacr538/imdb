@@ -87,7 +87,7 @@ export default function LoginWithIMDb(props) {
         </div>
         <div className='page-fields'>
           <label for="password">Password</label>
-          <input type='text' id='password' className='page-input' name="password" onChange={handleChangeLoginData}></input>
+          <input type='password' id='password' className='page-input' name="password" onChange={handleChangeLoginData}></input>
           <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
             {emptyError.passwordError}
           </p>
