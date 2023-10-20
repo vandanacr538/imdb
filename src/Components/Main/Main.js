@@ -154,7 +154,7 @@ export default function Main() {
                     </div>
                     <div className="vertical-m-details">
                       <a href="" className="video-link">
-                        <PlayCircleOutline sx={{ fontSize: "40px" }} />
+                        <PlayCircleOutline sx={{ fontSize: "40px" }} onClick={()=>handleClickVideo(element)} />
                       </a>
                       <p>{element.original_title}</p>
                       <p>Release on {element.release_date}</p>
@@ -164,7 +164,7 @@ export default function Main() {
               );
             })}
         </div>
-        <h3>Browse trailers{" >"}</h3>
+        <h3 onClick={()=>navigate("/browsetrailers")} id="browse-trailer">Browse trailers{" >"}</h3>
       </div>
     </div>
   );

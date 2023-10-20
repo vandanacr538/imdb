@@ -12,6 +12,7 @@ import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import OTPVerification from './Pages/OTPVerification/OTPVerification';
 import AccountSettings from './Pages/AccountSettings/AccountSettings';
 import Watchlist from './Pages/Wactchlist/Watchlist';
+import BrowseTrailers from './Pages/BrowseTrailers/BrowseTrailers';
 
 function App() {
   const [authButton, setAuthButton]=useState(false);
@@ -48,6 +49,7 @@ function App() {
             <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
             <Route path='/accountsettings' element={<AccountSettings setAuthButton={setAuthButton}/>}></Route>
             <Route path='/watchlist' element={<Watchlist setWatchlistMoviesCount={setWatchlistMoviesCount}/>}></Route>
+            <Route path='/browsetrailers' element={<BrowseTrailers/>}></Route>
         </Route>
       </Routes>
       <Routes>

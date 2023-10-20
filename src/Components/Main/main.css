@@ -84,3 +84,6 @@
 .vertical-m-details{
     margin-left: 10px;
 }
+#browse-trailer{
+    cursor: pointer;
+}
