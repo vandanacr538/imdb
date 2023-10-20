@@ -3,6 +3,7 @@ import "./moviecarousel.css";
 import {
   Add,
   Bookmark,
+  Close,
   Done,
   NavigateBefore,
   NavigateNext,
@@ -10,18 +11,18 @@ import {
   Star,
   StarBorderOutlined,
 } from "@mui/icons-material";
-import { Box, Button, Modal, Rating, Typography } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieCarousel(props) {
-  const cardElement=useRef();
-  const [moviesArr, setMoviesArr] = useState([]);
+  const cardElement = useRef();
+  const [moviesArr, setMoviesArr] = useState();
+  const [movieDetailModal, setMovieDetailModal] = useState({});
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [value, setValue] = useState(0);
-  const [keys, setKeys]=useState();
+  const [keys, setKeys] = useState();
   const [watchlistItems, setWatchlistItems] = useState([]);
+  const navigate = useNavigate();
 
   const handleClickBackward = () => {
     cardElement.current.scrollBy({
@@ -37,77 +38,80 @@ export default function MovieCarousel(props) {
       behavior: "smooth",
     });
   };
-
-  const addToWatchlist=async(element)=>{
-    try{
-      const response=await axios.post("http://localhost:8080/watchlist/addtowatchlist", element,
-      {
-        headers:{
-          Authorization:localStorage.getItem("token"),
-        },
-      }
-      );
-      if(response.status===200){
-        window.location.reload();
-      }
-    }
-    catch(e){
-      console.log(e);
-    }
-  }
-  const removeFromWatchlist=async(element)=>{
-    try{
-      const res = await axios.delete(
-        "http://localhost:8080/watchlist/deletemoviefromwatchlist", 
-        { data: { element }, 
-          headers: {
-            Authorization:localStorage.getItem("token"),
-          }, 
-        }
-      );
-      if(res.status===200){
-        getWatchlistItems();
-        window.location.reload();
-      }
-    }
-    catch(e){
-      console.log(e);
-    }
-    
-  }
-  const getWatchlistItems=async()=>{
-    try{
+  const handleOpenMovieDetail = (element) => {
+    setOpen(true);
+    setMovieDetailModal(element);
+  };
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+  const getWatchlistItems = async () => {
+    try {
       const res = await axios.get(
         "http://localhost:8080/watchlist/mywatchlist",
         {
           headers: {
-            Authorization:localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
-      setWatchlistItems(res.data.results.map((elem)=>{
-        return Number(elem.id);
-      }))
-    }
-    catch(e){
+      setWatchlistItems(
+        res.data.results.map((elem) => {
+          return Number(elem.id);
+        })
+      );
+    } catch (e) {
       console.log(e);
     }
-  }
-  const getMovies = async () => {
-    if(props.auth==="own"){
-      const res = await axios.get(
-        props.api,
+  };
+  const addToWatchlist = async (element) => {
+    if (localStorage.getItem("token")) {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/watchlist/addtowatchlist",
+          element,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.status === 200) {
+          getWatchlistItems();
+          // window.location.reload();
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+  const removeFromWatchlist = async (element) => {
+    try {
+      const res = await axios.delete(
+        "http://localhost:8080/watchlist/deletemoviefromwatchlist",
         {
+          data: { element },
           headers: {
-            Authorization:localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
-      setMoviesArr(res.data.results);
+      if (res.status === 200) {
+        getWatchlistItems();
+        // window.location.reload();
+      }
+    } catch (e) {
+      console.log(e);
     }
-    else{
-      const res = await axios.get(
-        props.api,
+  };
+  const getMovieIds = (movieslistfromAPI) => {
+    const getIds = movieslistfromAPI.map(async (element) => {
+      const response = await axios.get(
+        "https://api.themoviedb.org/3/movie/" +
+          element.id +
+          "/videos?language=en-US",
         {
           headers: {
             Authorization:
@@ -116,151 +120,247 @@ export default function MovieCarousel(props) {
           },
         }
       );
-      setMoviesArr(res.data.results);
+      return response.data;
+    });
+    // // getIds will be an array of promises
+    // console.log(getIds);
 
-      const getIds=res.data.results.map(async(element)=>{
-        const response=await axios.get("https://api.themoviedb.org/3/movie/" +element.id+ "/videos?language=en-US",
-        {
-          headers:{
-            Authorization:
-            "Bearer "+
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0"
-          },
+    Promise.all(getIds).then((data) => {
+      const final = data.map((element) => {
+        return element.results.filter((filteredElement) => {
+          return (
+            filteredElement.type === "Trailer" &&
+            filteredElement.name === "Official Trailer"
+          );
         });
-        return response.data;
-      }); 
-      // getIds will be an array of promises
-      // console.log(getIds);
-
-      Promise.all(getIds).then((data)=>{
-        const final=data.map((element)=>{
-          return element.results.filter((filteredElement)=>{
-            return filteredElement.type==="Trailer" && filteredElement.name==="Official Trailer";
-          });
-        });
-        const movieKeysArr=final.map((elem)=>{
-          if(elem.length!=0){
-            if(elem[0].hasOwnProperty("key")){
-              return elem[0].key;
-            }
-          }
-          else{
-            return "random";
-          }
-        });
-        // console.log(movieKeysArr);
-        // console.log(movieKeysArr[1]);
-        setKeys(movieKeysArr);
       });
-
+      const movieKeysArr = final.map((elem) => {
+        if (elem.length != 0) {
+          if (elem[0].hasOwnProperty("key")) {
+            return elem[0].key;
+          }
+        } else {
+          return "random";
+        }
+      });
+      // console.log(movieKeysArr);
+      // console.log(movieKeysArr[1]);
+      setKeys(movieKeysArr);
+    });
+  };
+  const getMovies = async () => {
+    if (props.auth === "own") {
+      const res = await axios.get(props.api, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      getMovieIds(res.data.results);
+      setMoviesArr(res.data.results);
+    } else {
+      const res = await axios.get(props.api, {
+        headers: {
+          Authorization:
+            "Bearer " +
+            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
+        },
+      });
+      getMovieIds(res.data.results);
+      setMoviesArr(res.data.results);
     }
   };
   useEffect(() => {
     getMovies();
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       getWatchlistItems();
     }
+    window.addEventListener("scroll", () => {
+      setOpen(false);
+    });
   }, []);
 
   return (
     <div className="movie-carousel-main-container">
       <h2>{props.heading}</h2>
       <div className="carousel-container">
-        <button
-          className="moviecar-nav moviecar-nav-left"
-          onClick={handleClickBackward}
-        >
-          <NavigateBefore className="nav-icon" />
-        </button>
-        <button
-          className="moviecar-nav moviecar-nav-right"
-          onClick={handleClickForward}
-        >
-          <NavigateNext className="nav-icon" />
-        </button>
         <div className="cards" ref={cardElement}>
-          {moviesArr?.map((element, index) => {
-            return (
-              <>
-                <div className="card">
-                  {watchlistItems?.includes(element.id) ? (
-                    <div className="overlay-icon" onClick={() => {removeFromWatchlist(element);}}>
-                      <Bookmark className="overlay-bookmark-done" />
-                      <div className="overlay-add-done-icon">
-                        <Done style={{ color: "#000" }} />
-                      </div>
-                    </div>
-                  ) : (
-                    <div
-                      className="overlay-icon"
-                      onClick={() => {
-                        addToWatchlist(element);
-                      }}
-                    >
-                      <Bookmark className="overlay-bookmark-add" />
-                      <div className="overlay-add-done-icon">
-                        <Add />
-                      </div>
-                    </div>
-                  )}
-                  <img src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}></img>
-                  <div className="card-movie-details">
-                    <div className="rating-container">
-                      <div className="rating">
-                        <p>
-                          <Star
-                            style={{ color: "#f5c518", marginRight: "5px" }}
-                          />
+          {moviesArr ? (
+            <>
+              <button
+                className="moviecar-nav moviecar-nav-left"
+                onClick={handleClickBackward}
+              >
+                <NavigateBefore className="nav-icon" />
+              </button>
+              <button
+                className="moviecar-nav moviecar-nav-right"
+                onClick={handleClickForward}
+              >
+                <NavigateNext className="nav-icon" />
+              </button>
+              {moviesArr?.map((element, index) => {
+                return (
+                  <>
+                    <div className="card">
+                      {watchlistItems?.includes(element.id) ? (
+                        <div
+                          className="overlay-icon"
+                          onClick={() => {
+                            removeFromWatchlist(element);
+                          }}
+                        >
+                          <Bookmark className="overlay-bookmark-done" />
+                          <div className="overlay-add-done-icon">
+                            <Done style={{ color: "#000" }} />
+                          </div>
+                        </div>
+                      ) : (
+                        <div
+                          className="overlay-icon"
+                          onClick={() => {
+                            addToWatchlist(element);
+                          }}
+                        >
+                          <Bookmark className="overlay-bookmark-add" />
+                          <div className="overlay-add-done-icon">
+                            <Add />
+                          </div>
+                        </div>
+                      )}
+                      <img
+                        src={
+                          `https://image.tmdb.org/t/p/w185/` +
+                          element.poster_path
+                        }
+                        className="movie-carousel-img"
+                      ></img>
+                      <div className="card-movie-details">
+                        <div className="rating-container">
+                          <div className="rating">
+                            <p>
+                              <Star
+                                style={{ color: "#f5c518", marginRight: "5px" }}
+                              />
+                            </p>
+                            <p>{element.vote_average}</p>
+                          </div>
+                          <Button>
+                            <StarBorderOutlined style={{ fontSize: "20px" }} />
+                          </Button>
+                        </div>
+                        <p className="card-movie-title">
+                          {index + 1}. {element.original_title}
                         </p>
-                        <p>{element.vote_average}</p>
+                        {watchlistItems?.includes(element.id) ? (
+                          <Button
+                            className="watchlist-btn"
+                            onClick={() => {
+                              removeFromWatchlist(element);
+                            }}
+                          >
+                            <Done style={{ marginRight: "5px" }} />
+                            Watchlist
+                          </Button>
+                        ) : (
+                          <Button
+                            className="watchlist-btn"
+                            onClick={() => {
+                              addToWatchlist(element);
+                            }}
+                          >
+                            <Add style={{ marginRight: "5px" }} />
+                            Watchlist
+                          </Button>
+                        )}
+                        <div className="watch-trailer">
+                          {keys?.map((keyElement, keyindex) => {
+                            return (
+                              <>
+                                {keyindex === index && (
+                                  <>
+                                    {keyElement === "random" ? (
+                                      <div className="no-trailer-btn"></div>
+                                    ) : (
+                                      <Button className="watch-trailer-btn">
+                                        <PlayArrow
+                                          style={{ marginRight: "5px" }}
+                                        />
+                                        <a
+                                          href={
+                                            "https://youtube.com/watch?v=" +
+                                            keyElement
+                                          }
+                                          target="blank"
+                                        >
+                                          Trailer
+                                        </a>
+                                      </Button>
+                                    )}
+                                  </>
+                                )}
+                              </>
+                            );
+                          })}
+                          <Button
+                            className="not-btn"
+                            onClick={() => handleOpenMovieDetail(element)}
+                          >
+                            {"!"}
+                          </Button>
+                        </div>
                       </div>
-                      <Button onClick={handleOpen}>
-                        <StarBorderOutlined style={{ fontSize: "20px" }} />
-                      </Button>
                     </div>
-                    <p className="card-movie-title">{index+1}. {element.original_title}</p>
-                    <Button className="watchlist-btn">
-                      <Add style={{ marginRight: "5px" }} />
-                      Watchlist
-                    </Button>
-                    <div className="watch-trailer">
-                      <Button className="watch-trailer-btn">
-                        <PlayArrow style={{ marginRight: "5px" }} />
-                        {keys?.map((keyElement,keyindex) => {
-                          return (
-                            <>
-                            {keyindex===index &&
-                                <a href={"https://youtube.com/watch?v=" + keyElement}>Trailer</a>
-                            }
-                            </>
-                          );
-                        })}
-                      </Button>
-                      <Button className="not-btn">{"!"}</Button>
-                    </div>
+                  </>
+                );
+              })}
+            </>
+          ) : (
+            <div className="movie-carousel-loading">
+              <CircularProgress
+                style={{ color: "#888", width: "70px", height: "70px" }}
+              />
+            </div>
+          )}
+        </div>
+        {Object.keys(movieDetailModal)?.map(() => {
+          return (
+            <div
+              className={open ? "movie-detail-modal" : "no-movie-detail-modal"}
+            >
+              <div className="modal-close-icon" onClick={handleCloseModal}>
+                <Close />
+              </div>
+              <div className="movie-detail-modal-content">
+                <img
+                  src={
+                    `https://image.tmdb.org/t/p/w185/` +
+                    movieDetailModal.poster_path
+                  }
+                  className="movie-detail-modal-img"
+                ></img>
+                <div className="movie-detail-modal-detail">
+                  <h3 className="movie-detail-modal-heading">
+                    {movieDetailModal.original_title}
+                  </h3>
+                  <p>Release Date: {movieDetailModal.release_date}</p>
+                  <p>Language: {movieDetailModal.original_language}</p>
+                  <div className="movie-detail-modal-rating">
+                    <Star
+                      style={{
+                        color: "#f5c518",
+                        fontSize: "17px",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <p>{movieDetailModal.vote_average}/10</p>
                   </div>
                 </div>
-              </>
-            );
-          })}
-        </div>
+              </div>
+              <p>{movieDetailModal.overview}</p>
+            </div>
+          );
+        })}
       </div>
-      <Modal open={open} onClose={handleClose}>
-        <Box className="rating-modal">
-          <Star className="rating-star" />
-          <span className="rating-star-value">{value}</span>
-          <p className="rating-modal-heading">RATE THIS</p>
-          <p>Oppenheimer</p>
-          <Rating
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-              console.log(value);
-            }}
-          />
-          <button className="rate-btn">Rate</button>
-        </Box>
-      </Modal>
     </div>
   );
 }
