@@ -195,6 +195,9 @@ header{
     font-weight: inherit;
     cursor: pointer;
 }
+.select-language:focus{
+    outline: none;
+}
 .select-language:hover{
     background-color: #272525;
 }

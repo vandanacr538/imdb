@@ -332,7 +332,6 @@ export default function Header(props) {
         </Button>
         <select className="select-language">
           <option>English</option>
-          <option>Italiano</option>
         </select>
       </header>
     </div>

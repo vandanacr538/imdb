@@ -18,6 +18,17 @@ export default function OTPVerification(props) {
   const handleChangeOTP=(e)=>{
     setOtp(e.target.value);
   }
+  const resendOTP=async()=>{
+    try{
+      let result=await axios.post("http://localhost:8080/createaccount/resendotp", {email});
+      if(result.status===200){
+        console.log(result.data.msg);
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
   const validateOTP=async()=>{
     if(otp===""){
         setOtpError("Enter OTP sent on your "+email);
@@ -70,7 +81,7 @@ export default function OTPVerification(props) {
             <button className='page-task-complete-btn' onClick={validateOTP}>Create your IMDb account</button>
         </div>
         <p id="otp-verif-condition">By creating an IMDb account, you agree to the IMDb <span>Conditions of Use</span></p>
-        <span class='resend-otp'>Resend OTP</span>
+        <span class='resend-otp' onClick={resendOTP}>Resend OTP</span>
       </div>
     </div>
   )
