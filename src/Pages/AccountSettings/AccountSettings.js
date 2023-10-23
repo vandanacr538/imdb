@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./accountsettings.css";
 import { decodeToken } from 'react-jwt';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function AccountSettings(props) {
@@ -9,8 +9,6 @@ export default function AccountSettings(props) {
   const [error, setError]=useState({
     nameError:"", current_passwordError:"", new_passwordError:"", re_enter_new_passwordError:""});
   const navigate=useNavigate();
-  const location = useLocation();
-  // const setUserProfileData=location.state;
 
   const handleChangeEditUserProfile=(e)=>{
     setEditUserProfile((previousData)=>({...previousData, [e.target.name]:e.target.value}));
@@ -20,7 +18,7 @@ export default function AccountSettings(props) {
   }
   const validateUserData=()=>{
     if(editUserProfile.name === ""){
-      setError((previousData)=>({...previousData, nameError:"Name cannot be emmpty"}))
+      setError((previousData)=>({...previousData, nameError:"Name cannot be emmpty"}));
       return false;
     }
     if("current_password" in editUserProfile || "new_password" in editUserProfile || "re_enter_new_password" in editUserProfile){
@@ -32,8 +30,14 @@ export default function AccountSettings(props) {
         else if (editUserProfile.new_password !=="" || editUserProfile.re_enter_new_password!=="") {
           if(editUserProfile.current_password!==editUserProfile.new_password){
             if(editUserProfile.new_password===editUserProfile.re_enter_new_password){
-              setError((previousData)=>({...previousData, current_passwordError:"", new_passwordError:"", re_enter_new_passwordError:""}));
-              return true;
+              if(editUserProfile.new_password.length>=8){
+                setError((previousData)=>({...previousData, current_passwordError:"", new_passwordError:"", re_enter_new_passwordError:""}));
+                return true;
+              }
+              else{
+                setError((previousData)=>({...previousData, current_passwordError:"", new_passwordError:"Password must have atleast 8 characters", re_enter_new_passwordError:""}));
+                return false;
+              }
             }
             else{
               setError((previousData)=>({...previousData, current_passwordError:"", new_passwordError:"Passwords must match", re_enter_new_passwordError:"Passwords must match" }));
@@ -110,7 +114,7 @@ export default function AccountSettings(props) {
             <div className='page-fields'>
               <label for="name">Name</label>
               <input type='text' id='name' className='page-input' name="name" value={editUserProfile.name} onChange={handleChangeEditUserProfile}></input>
-              <p className={error.nameError!="" ? "settings-error" : "no-settings-error"}>{error.nameError}</p>
+              <p className={error.nameError!=="" ? "settings-error" : "no-settings-error"}>{error.nameError}</p>
             </div>
             <div className='page-fields'>
               <label for="email">Email</label>
@@ -123,17 +127,17 @@ export default function AccountSettings(props) {
             <div className='page-fields'>
               <label for="current-password">Current Password</label>
               <input type='text' id='current-password' className='page-input' name="current_password" onChange={handleChangeEditUserProfile} ></input>
-              <p className={error.current_passwordError!="" ? "settings-error" : "no-settings-error"}>{error.current_passwordError}</p>
+              <p className={error.current_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.current_passwordError}</p>
             </div>
             <div className='page-fields'>
               <label for="new_password">New Password</label>
-              <input type='text' id='new_password' className='page-input' name="new_password" onChange={handleChangeEditUserProfile} ></input>
-              <p className={error.new_passwordError!="" ? "settings-error" : "no-settings-error"}>{error.new_passwordError}</p>
+              <input type='password' id='new_password' className='page-input' name="new_password" onChange={handleChangeEditUserProfile} ></input>
+              <p className={error.new_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.new_passwordError}</p>
             </div>
             <div className='page-fields'>
               <label for="re_enter_new_password">Re-enter New Password</label>
-              <input type='text' id='re_enter_new_password' className='page-input' name="re_enter_new_password" onChange={handleChangeEditUserProfile} ></input>
-              <p className={error.re_enter_new_passwordError!="" ? "settings-error" : "no-settings-error"}>{error.re_enter_new_passwordError}</p>
+              <input type='password' id='re_enter_new_password' className='page-input' name="re_enter_new_password" onChange={handleChangeEditUserProfile} ></input>
+              <p className={error.re_enter_new_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.re_enter_new_passwordError}</p>
             </div>
             <div className='acc-settings-btns'>
               <button className='cancel-btn' onClick={handleClickCancelEdit}>Cancel</button>
