@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./header.css";
 import { Box, Button, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,7 +11,6 @@ import {
   People,
   Public,
   Search,
-  Star,
   StarsRounded,
   Tv,
   VideoLibrary,
@@ -32,6 +31,7 @@ export default function Header(props) {
   const [allMoviesList, setAllMoviesList] = useState();
   const [searchOutputArr, setSearchOutputArr] = useState([]);
   const [noSearchData, setNoSearchData] = useState(false);
+  const closeUserDropDown = useRef();
   const navigate=useNavigate();
   const gotoHome=()=>{
     navigate("/");
@@ -117,11 +117,8 @@ export default function Header(props) {
       navigate("/login");
     }
   }
-  const displayUserProfileDropDown=()=>{
-    if(localStorage.getItem("token")){
-      setUserDropDown(!userDropDown);
-    }
-    else{
+  const gotoSignInPage=()=>{
+    if(localStorage.getItem("token")===null){
       navigate("/login");
     }
   }
@@ -145,6 +142,19 @@ export default function Header(props) {
       console.log(e);
     }
   }
+  const handleClickUserDropDown=(e)=>{
+    if(closeUserDropDown.current.contains(e.target)){
+      setUserDropDown((previous)=>!previous);
+    }
+    else{
+      setUserDropDown(false);
+    }
+  }
+  useEffect(()=>{
+    if(localStorage.getItem("token")){
+      document.addEventListener("click", handleClickUserDropDown);
+    }
+  }, []);
   useEffect(()=>{
     if(localStorage.getItem("token")){
       getUserData();
@@ -311,7 +321,9 @@ export default function Header(props) {
             )}
           </span>
         </Button>
-        <Button className="header-btn" onClick={displayUserProfileDropDown}>
+        <Button className="header-btn" 
+        onClick={gotoSignInPage} 
+        ref={closeUserDropDown}>
           {props.authButton ? (
             <>
               <AccountCircle />
