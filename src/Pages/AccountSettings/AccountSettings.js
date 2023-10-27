@@ -3,6 +3,7 @@ import "./accountsettings.css";
 import { decodeToken } from 'react-jwt';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "../../utils/interceptor";
 
 export default function AccountSettings(props) {
   const [editUserProfile, setEditUserProfile] = useState({});
@@ -71,8 +72,7 @@ export default function AccountSettings(props) {
   const getUserData=async()=>{
     if(localStorage.getItem("token")){
       try{
-        let userDataDecoded=decodeToken(localStorage.getItem("token"));
-        const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata", userDataDecoded);
+        const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata");
         setEditUserProfile(decodeToken(result.data.token));
       }
       catch(e){

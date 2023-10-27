@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import "../../utils/interceptor";
 let historyItems=[];
 export default function Main() {
   let myTimeout;
@@ -93,14 +94,7 @@ export default function Main() {
 
   const getMovies = async () => {
     const res = await axios.get(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-        },
-      }
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
     );
     setMoviesArr(res.data.results);
     setCurrentMovie(res.data.results[0]);

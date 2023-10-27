@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./protectedlayout.css";
 import axios from "axios";
+import "../../utils/interceptor";
 
 export default function ProtectedLayout() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -18,11 +19,7 @@ export default function ProtectedLayout() {
   };
   const checkMyWachlist = async () => {
     try{
-      const res = await axios.get("http://localhost:8080/watchlist/mywatchlist", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const res = await axios.get("http://localhost:8080/watchlist/mywatchlist");
       setMyWatchlist(res.data.results);
     }
     catch(e){

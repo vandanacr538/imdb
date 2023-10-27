@@ -14,6 +14,7 @@ import {
 import { Button, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../../utils/interceptor";
 
 export default function MovieCarousel(props) {
   const cardElement = useRef();
@@ -48,12 +49,7 @@ export default function MovieCarousel(props) {
   const getWatchlistItems = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist",
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
+        "http://localhost:8080/watchlist/mywatchlist"
       );
       setWatchlistItems(
         res.data.results.map((elem) => {
@@ -70,11 +66,6 @@ export default function MovieCarousel(props) {
         const response = await axios.post(
           "http://localhost:8080/watchlist/addtowatchlist",
           element,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
-          }
         );
         if (response.status === 200) {
           getWatchlistItems();
@@ -93,9 +84,6 @@ export default function MovieCarousel(props) {
         "http://localhost:8080/watchlist/deletemoviefromwatchlist",
         {
           data: { element },
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
         }
       );
       if (res.status === 200) {
@@ -112,13 +100,6 @@ export default function MovieCarousel(props) {
         "https://api.themoviedb.org/3/movie/" +
           element.id +
           "/videos?language=en-US",
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-          },
-        }
       );
       return response.data;
     });
@@ -150,21 +131,11 @@ export default function MovieCarousel(props) {
   };
   const getMovies = async () => {
     if (props.auth === "own") {
-      const res = await axios.get(props.api, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const res = await axios.get(props.api);
       getMovieIds(res.data.results);
       setMoviesArr(res.data.results);
     } else {
-      const res = await axios.get(props.api, {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-        },
-      });
+      const res = await axios.get(props.api);
       getMovieIds(res.data.results);
       setMoviesArr(res.data.results);
     }

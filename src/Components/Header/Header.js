@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { decodeToken } from "react-jwt";
 import axios from "axios";
+import "../../utils/interceptor";
 let historyItems=[];
 
 export default function Header(props) {
@@ -38,14 +39,7 @@ export default function Header(props) {
   }
   const getAllMoviesList=async()=>{
     const res = await axios.get(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-        },
-      }
+      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
     );
     setAllMoviesList(res.data.results);
   }
@@ -95,12 +89,7 @@ export default function Header(props) {
   const getWatchlistCount=async()=>{
     try{
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist",
-        {
-          headers: {
-            Authorization:localStorage.getItem("token"),
-          },
-        }
+        "http://localhost:8080/watchlist/mywatchlist"
       );
       console.log(res.data.results.length);
       setWatchlistMoviesCount(res.data.results.length);
@@ -134,8 +123,7 @@ export default function Header(props) {
   }
   const getUserData=async()=>{
     try{
-      let userDataDecoded=decodeToken(localStorage.getItem("token"));
-      const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata", userDataDecoded);
+      const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata");
       setUserProfileData(decodeToken(result.data.token));
     }
     catch(e){

@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "./play.css";
+import "../../utils/interceptor";
 
 export default function Play() {
   const [play, setPlay] = useState(true);
@@ -33,14 +34,7 @@ export default function Play() {
   };
   const getMovieTrailers = async () => {
     const response = await axios.get(
-      "https://api.themoviedb.org/3/movie/" + id + "/videos?language=en-US",
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-        },
-      }
+      "https://api.themoviedb.org/3/movie/" + id + "/videos?language=en-US"
     );
     let movieTrailer = response.data.results.filter((element) => {
       return (

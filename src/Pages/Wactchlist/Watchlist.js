@@ -4,6 +4,7 @@ import { Add, Bookmark, Done, Star } from "@mui/icons-material";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "../../utils/interceptor";
 
 export default function Watchlist(props) {
   const [watchlistPageArr, setWatchlistPageArr] = useState();
@@ -13,12 +14,7 @@ export default function Watchlist(props) {
   const getYourWatchlist = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist",
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
+        "http://localhost:8080/watchlist/mywatchlist"
       );
       setWatchlistPageArr(res.data.results);
       props.setWatchlistMoviesCount(res.data.results.length);
@@ -26,14 +22,7 @@ export default function Watchlist(props) {
         const response = await axios.get(
           "https://api.themoviedb.org/3/movie/" +
             element.id +
-            "/videos?language=en-US",
-          {
-            headers: {
-              Authorization:
-                "Bearer " +
-                "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNjhhYWU0YzYyNzFlNmNmZjUzODNlMGU5YjM3ZTRlYyIsInN1YiI6IjY0Y2U2YWY1NmQ0Yzk3MDBjYjdkYjg0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0exlYdltt0_hYnHKl7FexczP3qg_sChBIeCZypZXsT0",
-            },
-          }
+            "/videos?language=en-US"
         );
         return response.data;
       });
@@ -66,10 +55,7 @@ export default function Watchlist(props) {
     try{
       const res = await axios.delete(
         "http://localhost:8080/watchlist/deletemoviefromwatchlist", 
-        { data: { element }, 
-          headers: {
-            Authorization:localStorage.getItem("token"),
-          }, 
+        { data: { element } 
         }
       );
       if(res.status===200){
