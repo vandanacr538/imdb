@@ -4,13 +4,15 @@ import "./otpverification.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Error } from '@mui/icons-material';
 import axios from 'axios';
+import base64 from "base-64";
+import { decodeToken } from 'react-jwt';
 
 export default function OTPVerification(props) {
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] =useState("");
   const navigate=useNavigate();
   const location = useLocation();
-  const {email} = location.state.createAccData;
+  const  {email}= decodeToken(location.state.createAccAPIResponseToken);
 
   const gotoHome=()=>{
     navigate("/");
@@ -20,7 +22,12 @@ export default function OTPVerification(props) {
   }
   const resendOTP=async()=>{
     try{
-      let result=await axios.post("http://localhost:8080/createaccount/resendotp", {email});
+      let result=await axios.post("http://localhost:8080/createaccount/resendotp", {}, 
+      {
+        headers:{
+          Authorization: base64.encode(email)
+        }
+      });
       if(result.status===200){
         console.log(result.data.msg);
       }
@@ -35,8 +42,14 @@ export default function OTPVerification(props) {
     }
     else{
         setOtpError("");
+        const otpObj={otp:otp, email:email};
         try{
-            let result=await axios.post("http://localhost:8080/createaccount/verifyotp", {otp, email});
+            let result=await axios.post("http://localhost:8080/createaccount/verifyotp", {},
+            {
+              headers:{
+                Authorization:base64.encode(JSON.stringify(otpObj))
+              }
+            });
             if(result.status===200){
                 console.log(result.data.token);
                 localStorage.setItem("token", result.data.token);

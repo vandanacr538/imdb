@@ -4,8 +4,10 @@ import { decodeToken } from 'react-jwt';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../../utils/interceptor";
+import base64 from "base-64";
+let encodeEditUserProfile;
 
-export default function AccountSettings(props) {
+export default function AccountSettings() {
   const [editUserProfile, setEditUserProfile] = useState({});
   const [error, setError]=useState({
     nameError:"", current_passwordError:"", new_passwordError:"", re_enter_new_passwordError:""});
@@ -81,8 +83,15 @@ export default function AccountSettings(props) {
     }
   }
   const updateUserProfile= async()=>{
+   encodeEditUserProfile=base64.encode(JSON.stringify(editUserProfile));
     try{
-      const result=await axios.post("http://localhost:8080/createaccount/edituserdata", editUserProfile); 
+      const result=await axios.post("http://localhost:8080/createaccount/edituserdata", 
+      {},
+      {
+        headers:{
+          Authorization:encodeEditUserProfile
+        }
+      }); 
       if(result.status===200){
         localStorage.setItem("token", result.data.token);
         getUserData();
@@ -149,3 +158,5 @@ export default function AccountSettings(props) {
     </div>
   )
 }
+
+export {encodeEditUserProfile};

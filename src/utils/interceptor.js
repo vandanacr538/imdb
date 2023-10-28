@@ -1,4 +1,5 @@
 import axios from "axios";
+import { encodeEditUserProfile } from "../Pages/AccountSettings/AccountSettings";
 
 axios.interceptors.request.use((config) => {
 //   console.log(config);
@@ -8,7 +9,13 @@ axios.interceptors.request.use((config) => {
   }
   else{
     if (localStorage.getItem("token") != null) {
+      if(config.url.includes("edituserdata")){
+        config.headers["Authorization"] = encodeEditUserProfile;
+      }
+      else{
         config.headers["Authorization"] = localStorage.getItem("token");
+      }
+        
     }
   }
   return config;

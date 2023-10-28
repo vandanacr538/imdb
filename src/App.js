@@ -47,7 +47,7 @@ function App() {
             <Route path='/' element={<MainComp/>}></Route>
             <Route path='/play/:id' element={<Play/>}></Route>
             <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
-            <Route path='/accountsettings' element={<AccountSettings setAuthButton={setAuthButton}/>}></Route>
+            <Route path='/accountsettings' element={<AccountSettings/>}></Route>
             <Route path='/watchlist' element={<Watchlist setWatchlistMoviesCount={setWatchlistMoviesCount}/>}></Route>
             <Route path='/browsetrailers' element={<BrowseTrailers/>}></Route>
         </Route>

@@ -4,6 +4,7 @@ import "./createaccount.css"
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, WarningAmber } from "@mui/icons-material";
 import axios from "axios";
+import base64 from "base-64";
 
 export default function CreateAccount() {
     const [createAccData, setCreateAccData]=useState({ name:"", email:"", password:"", re_enter_password:""});
@@ -61,12 +62,19 @@ export default function CreateAccount() {
         validateEmail();
         validatePassword();
         document.querySelector(".page-error-box").style.display="flex";
-        console.log(errorsArray);
+        // console.log(errorsArray);
     }
     const signUp=async()=>{
-      console.log("call api");
+      // console.log("call api");
+      const encodeCreateAccData=base64.encode(JSON.stringify(createAccData));
       try{
-        let result=await axios.post("http://localhost:8080/createaccount/createaccountapi", createAccData);
+        let result=await axios.post("http://localhost:8080/createaccount/createaccountapi", 
+        {}, {
+          headers:{
+            Authorization: encodeCreateAccData
+          }
+        }
+        );
         if(result.status===200){
           if(result.data.token==="already exists"){
             console.log(result.data.token);
@@ -75,8 +83,8 @@ export default function CreateAccount() {
             setIsAllDataValid(false);
           }
           else{
-            console.log(result.data.msg, "navigate to OTP Verification page");
-            navigate("/otp_verification_to_create_acc", {state:{createAccData}});
+            const createAccAPIResponseToken=result.data.token
+            navigate("/otp_verification_to_create_acc", {state:{createAccAPIResponseToken}});
           }
         }
       }
