@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -21,12 +21,19 @@ export default function Login(props) {
     onError: (error) => console.log('Login Failed:', error)
   });
   const sendToken=async(token)=>{
-    const result=await axios.post("http://localhost:8080/login/oauth", {token:token});
+    const result=await axios.post("http://localhost:8080/login/oauth", 
+    {},
+    {
+      headers:{
+        Authorization:token
+      }
+    });
     if(result.status===200 && result.data.msg==="Already verified user" || result.data.msg==="oauth successfull"){
       localStorage.setItem("token", result.data.token);
       console.log(decodeToken(result.data.token))
       props.setAuthButton(true);
       navigate("/");
+      window.location.reload();
     }
   }
   const gotoCreateAccPage=()=>{

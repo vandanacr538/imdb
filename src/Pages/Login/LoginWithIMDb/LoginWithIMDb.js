@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './../../loginandcreateacc.css';
 import './loginwithIMDb.css';
+import base64 from "base-64";
 
 export default function LoginWithIMDb(props) {
   const [loginData, setLoginData]=useState({});
@@ -46,8 +47,15 @@ export default function LoginWithIMDb(props) {
       }
     } 
     else{
+      const encodeLoginData=base64.encode(JSON.stringify(loginData));
       try{
-        let result=await axios.post("http://localhost:8080/login/loginapi", loginData);
+        let result=await axios.post("http://localhost:8080/login/loginapi", 
+        {},
+        {
+          headers:{
+            Authorization:encodeLoginData
+          }
+        });
         if(result.status===200){
           localStorage.setItem("token", result.data.token);
           props.setAuthButton(true);

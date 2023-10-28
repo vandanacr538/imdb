@@ -83,15 +83,9 @@ export default function AccountSettings() {
     }
   }
   const updateUserProfile= async()=>{
-   encodeEditUserProfile=base64.encode(JSON.stringify(editUserProfile));
+    encodeEditUserProfile=base64.encode(JSON.stringify(editUserProfile));
     try{
-      const result=await axios.post("http://localhost:8080/createaccount/edituserdata", 
-      {},
-      {
-        headers:{
-          Authorization:encodeEditUserProfile
-        }
-      }); 
+      const result=await axios.post("http://localhost:8080/createaccount/edituserdata"); 
       if(result.status===200){
         localStorage.setItem("token", result.data.token);
         getUserData();
