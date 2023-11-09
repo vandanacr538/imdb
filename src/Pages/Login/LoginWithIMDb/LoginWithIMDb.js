@@ -87,19 +87,19 @@ export default function LoginWithIMDb(props) {
       <div className='page-container signin-container'> 
         <h1>Sign in</h1>
         <div className='page-fields'>
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input type='text' id='email' className='page-input' name="email" onChange={handleChangeLoginData}></input>
-          <p className={emptyError.emailError!="" ? "empty-login-error" : "no-login-error"}>
+          <p className={emptyError.emailError!=="" ? "empty-login-error" : "no-login-error"}>
             {emptyError.emailError}
           </p>
         </div>
         <div className='page-fields'>
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input type='password' id='password' className='page-input' name="password" onChange={handleChangeLoginData}></input>
-          <p className={emptyError.passwordError!="" ? "empty-login-error" : "no-login-error"}>
+          <p className={emptyError.passwordError!=="" ? "empty-login-error" : "no-login-error"}>
             {emptyError.passwordError}
           </p>
-          <p className={loginError!="" ? "login-error" : "no-login-error" }>
+          <p className={loginError!=="" ? "login-error" : "no-login-error" }>
             {loginError}
           </p>
         </div>

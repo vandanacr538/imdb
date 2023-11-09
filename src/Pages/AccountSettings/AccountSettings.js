@@ -115,30 +115,30 @@ export default function AccountSettings() {
           <div className='acc-settings-user-profile'>
             <h3>User Details</h3>
             <div className='page-fields'>
-              <label for="name">Name</label>
-              <input type='text' id='name' className='page-input' name="name" value={editUserProfile.name} onChange={handleChangeEditUserProfile}></input>
+              <label htmlFor="name">Name</label>
+              <input type='text' id='name' className='page-input' name="name" value={editUserProfile.name || ""} onChange={handleChangeEditUserProfile}></input>
               <p className={error.nameError!=="" ? "settings-error" : "no-settings-error"}>{error.nameError}</p>
             </div>
             <div className='page-fields'>
-              <label for="email">Email</label>
-              <input type='text' id='email' className='page-input' name="email" value={editUserProfile.email} onChange={handleChangeEditUserProfile} disabled></input>
+              <label htmlFor="email">Email</label>
+              <input type='text' id='email' className='page-input' name="email" value={editUserProfile.email || ""} onChange={handleChangeEditUserProfile} disabled></input>
             </div>
             <p className='acc-settings-note'><b>Note:</b> You cannot edit email-address, create a new account to change email address</p>
           </div>
           <div className='change-password'>
             <h3>Change Password</h3>
             <div className='page-fields'>
-              <label for="current-password">Current Password</label>
+              <label htmlFor="current-password">Current Password</label>
               <input type='text' id='current-password' className='page-input' name="current_password" onChange={handleChangeEditUserProfile} ></input>
               <p className={error.current_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.current_passwordError}</p>
             </div>
             <div className='page-fields'>
-              <label for="new_password">New Password</label>
+              <label htmlFor="new_password">New Password</label>
               <input type='password' id='new_password' className='page-input' name="new_password" onChange={handleChangeEditUserProfile} ></input>
               <p className={error.new_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.new_passwordError}</p>
             </div>
             <div className='page-fields'>
-              <label for="re_enter_new_password">Re-enter New Password</label>
+              <label htmlFor="re_enter_new_password">Re-enter New Password</label>
               <input type='password' id='re_enter_new_password' className='page-input' name="re_enter_new_password" onChange={handleChangeEditUserProfile} ></input>
               <p className={error.re_enter_new_passwordError!=="" ? "settings-error" : "no-settings-error"}>{error.re_enter_new_passwordError}</p>
             </div>

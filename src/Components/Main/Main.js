@@ -139,9 +139,9 @@ export default function Main() {
         <div className="vertical-movies-box">
           {moviesArr.slice(i, moviesArr.length)
             .filter((element, index) => index < 3)
-            .map((element) => {
+            .map((element, mapindex) => {
               return (
-                <>
+                <div key={mapindex}>
                   <div className="vertical-movies">
                     <div className="vertical-m-banner">
                       <img src={`https://image.tmdb.org/t/p/w92/` + element.poster_path}></img>
@@ -154,7 +154,7 @@ export default function Main() {
                       <p>Release on {element.release_date}</p>
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
         </div>

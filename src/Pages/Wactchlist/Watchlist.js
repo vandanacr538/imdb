@@ -84,7 +84,7 @@ export default function Watchlist(props) {
                 <>
                   {watchlistPageArr.map((element, index) => {
                     return (
-                      <div className="watchlist-cards">
+                      <div className="watchlist-cards" key={index}>
                         <div className="watchlist-page-overlay-icon-box" onClick={() => {removeFromWatchlist(element);}}>
                           <Bookmark className="watchlist-page-overlay-done-bookmark" />
                           <div className="watchlist-page-overlay-icon">
@@ -102,7 +102,7 @@ export default function Watchlist(props) {
                           {trailerVideoKey?.map(
                             (trailerElement, trailerIndex) => {
                               return (
-                                <>
+                                <div key={trailerIndex}>
                                   {trailerIndex === index && (
                                     <a
                                       href={
@@ -115,7 +115,7 @@ export default function Watchlist(props) {
                                       {element.original_title}
                                     </a>
                                   )}
-                                </>
+                                </div>
                               );
                             }
                           )}

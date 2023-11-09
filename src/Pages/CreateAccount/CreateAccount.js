@@ -45,7 +45,7 @@ export default function CreateAccount() {
         setErrorsArray((previousData)=>([...previousData, "Passwords must match"]));
         setIsAllDataValid(false);
       }
-      else if(createAccData.password!=""){
+      else if(createAccData.password!==""){
         if(createAccData.password.length<8){
           setErrorsArray((previousData)=>([...previousData, "Passwords must be at least 8 characters"]));
           setIsAllDataValid(false);
@@ -124,20 +124,20 @@ export default function CreateAccount() {
       <div className="page-container create-acc-container">
         <h1>Create account</h1>
         <div className='page-fields'>
-          <label for="name">Your name</label>
+          <label htmlFor="name">Your name</label>
           <input type='text' id='name' className='page-input' name="name" placeholder="First and last name" onChange={handleChangeCreateAccData}></input>
         </div>
         <div className='page-fields'>
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input type='email' id='email' className='page-input' name="email" onChange={handleChangeCreateAccData}></input>
         </div>
         <div className='page-fields'>
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input type='password' id='password' className='page-input' name="password" placeholder="at least 8 characters" onChange={handleChangeCreateAccData}></input>
           <p className="password-rule">Passwords must be at least 8 characters.</p>
         </div>
         <div className='page-fields'>
-          <label for="re-enter-password">Re-enter passsword</label>
+          <label htmlFor="re-enter-password">Re-enter passsword</label>
           <input type='password' id='re-enter-password' className='page-input' name="re_enter_password" onChange={handleChangeCreateAccData}></input>
         </div>
         <div className='page-task-complete-btn-container create-btn-with-shadow'>

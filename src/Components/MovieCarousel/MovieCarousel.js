@@ -171,7 +171,7 @@ export default function MovieCarousel(props) {
               </button>
               {moviesArr?.map((element, index) => {
                 return (
-                  <>
+                  <div key={index}>
                     <div className="card">
                       {watchlistItems?.includes(element.id) ? (
                         <div
@@ -246,7 +246,7 @@ export default function MovieCarousel(props) {
                         <div className="watch-trailer">
                           {keys?.map((keyElement, keyindex) => {
                             return (
-                              <>
+                              <div key={keyindex}>
                                 {keyindex === index && (
                                   <>
                                     {keyElement === "random" ? (
@@ -269,7 +269,7 @@ export default function MovieCarousel(props) {
                                     )}
                                   </>
                                 )}
-                              </>
+                              </div>
                             );
                           })}
                           <Button
@@ -281,7 +281,7 @@ export default function MovieCarousel(props) {
                         </div>
                       </div>
                     </div>
-                  </>
+                  </div>
                 );
               })}
             </>

@@ -35,7 +35,7 @@ function App() {
     });
   }, []);
   return (
-    <GoogleOAuthProvider clientId='484151294674-jno436mqufdpsenrg2csnllfdpu8f1g8.apps.googleusercontent.com'>
+    <GoogleOAuthProvider clientId='870411297270-6o0fhfph6pi86ic5vk4la9nk8h5h2jnn.apps.googleusercontent.com'>
       <div>
       <button className='back-to-top-btn' onClick={scrollToTop} style={{display:displayBTTBtn}}>
         <KeyboardArrowUp/>
