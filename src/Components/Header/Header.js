@@ -288,7 +288,7 @@ export default function Header(props) {
                 {searchOutputArr?.map((element)=>{
                   return (
                   <div className="search-output-card" onClick={()=>handleClickVideo(element)}>
-                    <img src={`https://image.tmdb.org/t/p/w185/` + element.poster_path} className="img-search-output"></img>
+                    <img src={`https://image.tmdb.org/t/p/w185/` + element.poster_path} alt="movie" className="img-search-output"></img>
                     <div>
                      <p>{element.original_title}</p>
                      <p>{element.overview}</p>

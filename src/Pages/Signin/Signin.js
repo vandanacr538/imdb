@@ -28,7 +28,7 @@ export default function Login(props) {
         Authorization:token
       }
     });
-    if(result.status===200 && result.data.msg==="Already verified user" || result.data.msg==="oauth successfull"){
+    if(result.status===200 && (result.data.msg==="Already verified user" || result.data.msg==="oauth successfull")){
       localStorage.setItem("token", result.data.token);
       console.log(decodeToken(result.data.token))
       props.setAuthButton(true);

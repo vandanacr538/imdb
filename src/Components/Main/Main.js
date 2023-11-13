@@ -120,7 +120,7 @@ export default function Main() {
         >
           <NavigateBefore className="nav-icon" />
         </button>
-        <img src={`https://image.tmdb.org/t/p/w1280/` + currentMovie.poster_path} className="horizontal-banner"></img>
+        <img src={`https://image.tmdb.org/t/p/w1280/` + currentMovie.poster_path} alt="movie" className="horizontal-banner"></img>
         <div className="horizontal-banner-details">
           <a href="" className="video-link">
             <PlayCircleOutline sx={{ fontSize: "60px" }} onClick={()=>handleClickVideo(currentMovie)}/>
@@ -144,7 +144,7 @@ export default function Main() {
                 <div key={mapindex}>
                   <div className="vertical-movies">
                     <div className="vertical-m-banner">
-                      <img src={`https://image.tmdb.org/t/p/w92/` + element.poster_path}></img>
+                      <img src={`https://image.tmdb.org/t/p/w92/` + element.poster_path} alt="movie"></img>
                     </div>
                     <div className="vertical-m-details">
                       <a href="" className="video-link">

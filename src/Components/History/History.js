@@ -29,6 +29,7 @@ export default function History() {
             <>
               <img
                 src={`https://image.tmdb.org/t/p/w185/` + element.poster_path}
+                alt="movie"
                 className="history-img"
               ></img>
             </>

@@ -85,7 +85,7 @@ export default function OTPVerification(props) {
         <div className='page-fields'>
           <label for="otp">Enter OTP</label>
           <input type='text' id='otp' className='page-input' name="otp" maxLength={6} onChange={handleChangeOTP}></input>
-          <p className={otpError!="" ? "otp-error" : "no-otp-error"}>
+          <p className={otpError!=="" ? "otp-error" : "no-otp-error"}>
             <Error style={{color:"#c40000", marginRight:"5px"}}/>
             {otpError}
           </p>

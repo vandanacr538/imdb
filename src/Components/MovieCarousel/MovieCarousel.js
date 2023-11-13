@@ -116,7 +116,7 @@ export default function MovieCarousel(props) {
         });
       });
       const movieKeysArr = final.map((elem) => {
-        if (elem.length != 0) {
+        if (elem.length !== 0) {
           if (elem[0].hasOwnProperty("key")) {
             return elem[0].key;
           }
@@ -203,6 +203,7 @@ export default function MovieCarousel(props) {
                           `https://image.tmdb.org/t/p/w185/` +
                           element.poster_path
                         }
+                        alt="movie"
                         className="movie-carousel-img"
                       ></img>
                       <div className="card-movie-details">
@@ -307,6 +308,7 @@ export default function MovieCarousel(props) {
                     `https://image.tmdb.org/t/p/w185/` +
                     movieDetailModal.poster_path
                   }
+                  alt="movie"
                   className="movie-detail-modal-img"
                 ></img>
                 <div className="movie-detail-modal-detail">

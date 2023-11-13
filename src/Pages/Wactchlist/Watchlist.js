@@ -35,7 +35,7 @@ export default function Watchlist(props) {
           });
         });
         const movieKeysArr = final.map((elem) => {
-          if (elem.length != 0) {
+          if (elem.length !== 0) {
             if (elem[0].hasOwnProperty("key")) {
               return elem[0].key;
             }
@@ -94,6 +94,7 @@ export default function Watchlist(props) {
                             `https://image.tmdb.org/t/p/w185/` +
                             element.poster_path
                           }
+                          alt={element.original_title}
                           className="movie-img-in-wacthlist-page"
                         ></img>
                         <div className="watchlist-card-details">
