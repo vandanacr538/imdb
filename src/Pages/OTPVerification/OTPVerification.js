@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./../loginandcreateacc.css";
+import "../../CommonStyle/signinandcreateacc.css";
 import "./otpverification.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Error } from '@mui/icons-material';
@@ -81,7 +81,7 @@ export default function OTPVerification(props) {
       />
       <div className='page-container otp-verif-container'> 
         <h1>Verify email Address</h1>
-        <p id="otp-verif-desc">To verify your email, we've sent a One Time Password (OTP) to email-address <span onClick={()=>navigate("/createaccount")}>(Change)</span></p>
+        <p id="otp-verif-desc">To verify your email, we've sent a One Time Password (OTP) to email-address <span onClick={()=>navigate("/create_account")}>(Change)</span></p>
         <div className='page-fields'>
           <label for="otp">Enter OTP</label>
           <input type='text' id='otp' className='page-input' name="otp" maxLength={6} onChange={handleChangeOTP}></input>

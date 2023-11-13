@@ -1,6 +1,6 @@
 import React from 'react'
 import './footer.css';
-import { Facebook, Instagram, Telegram, Twitter, YouTube } from '@mui/icons-material';
+import { Facebook, Instagram, Twitter, YouTube } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <>
         <footer>
-            <button className='footer-signin-btn' onClick={()=>navigate("/login")}>Sign in for more access</button>
+            <button className='footer-signin-btn' onClick={()=>navigate("/signin")}>Sign in for more access</button>
             <div className='footer-smlinks'>
                 <a href='https://www.instagram.com/imdb/' target='blank' className='footer-sm-link'><Instagram /></a>
                 <a href='https://twitter.com/imdb' target='blank' className='footer-sm-link'><Twitter /></a>

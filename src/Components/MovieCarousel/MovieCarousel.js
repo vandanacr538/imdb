@@ -75,7 +75,7 @@ export default function MovieCarousel(props) {
         console.log(e);
       }
     } else {
-      navigate("/login");
+      navigate("/signin");
     }
   };
   const removeFromWatchlist = async (element) => {

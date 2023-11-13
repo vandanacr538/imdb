@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './../../loginandcreateacc.css';
-import './loginwithIMDb.css';
+import '../../CommonStyle/signinandcreateacc.css';
+import './signinwithimdb.css';
 import base64 from "base-64";
 
 export default function LoginWithIMDb(props) {
@@ -15,7 +15,7 @@ export default function LoginWithIMDb(props) {
     navigate("/");
   }
   const gotoCreateAccPage=()=>{
-    navigate("/createaccount");
+    navigate("/create_account");
   }
   const handleChangeLoginData=(e)=>{
     setLoginData((previousData)=>({...previousData, [e.target.name]:e.target.value}));

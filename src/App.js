@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import MainComp from './Components/MainComp/MainComp';
 import Play from './Pages/Play/Play';
-import Login from './Pages/Login/Login';
+import Signin from './Pages/Signin/Signin';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { KeyboardArrowUp } from '@mui/icons-material';
-import LoginWithIMDb from './Pages/Login/LoginWithIMDb/LoginWithIMDb';
+import SigninWithIMDb from './Pages/SigninWithIMDb/SigninWithIMDb';
 import HeaderFooterLayout from './Components/HeaderFooterLayout/HeaderFooterLayout';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import OTPVerification from './Pages/OTPVerification/OTPVerification';
@@ -46,16 +46,16 @@ function App() {
         <Route path='/' element={<HeaderFooterLayout authButton={authButton} watchlistMoviesCount={watchlistMoviesCount} setWatchlistMoviesCount={setWatchlistMoviesCount}/>}>
             <Route path='/' element={<MainComp/>}></Route>
             <Route path='/play/:id' element={<Play/>}></Route>
-            <Route path='/login' element={<Login setAuthButton={setAuthButton}/>}></Route>
-            <Route path='/accountsettings' element={<AccountSettings/>}></Route>
+            <Route path='/signin' element={<Signin setAuthButton={setAuthButton}/>}></Route>
+            <Route path='/account_settings' element={<AccountSettings/>}></Route>
             <Route path='/watchlist' element={<Watchlist setWatchlistMoviesCount={setWatchlistMoviesCount}/>}></Route>
             <Route path='/browsetrailers' element={<BrowseTrailers/>}></Route>
         </Route>
       </Routes>
       <Routes>
-        <Route path='/loginwithIMDb' element={<LoginWithIMDb setAuthButton={setAuthButton} />}></Route>
-        <Route path='/createaccount' element={<CreateAccount/>}></Route>
-        <Route path='/otp_verification_to_create_acc' element={<OTPVerification watchlistMoviesCount={watchlistMoviesCount} setAuthButton={setAuthButton}/>}></Route>
+        <Route path='/signin/signin_with_imdb' element={<SigninWithIMDb setAuthButton={setAuthButton} />}></Route>
+        <Route path='/create_account' element={<CreateAccount/>}></Route>
+        <Route path='/create_account/otp_verification' element={<OTPVerification watchlistMoviesCount={watchlistMoviesCount} setAuthButton={setAuthButton}/>}></Route>
       </Routes>
       </BrowserRouter>
     </div>

@@ -103,12 +103,12 @@ export default function Header(props) {
       navigate("/watchlist");
     }
     else{
-      navigate("/login");
+      navigate("/signin");
     }
   }
   const gotoSignInPage=()=>{
     if(localStorage.getItem("token")===null){
-      navigate("/login");
+      navigate("/signin");
     }
   }
   const signOut=(event)=>{
@@ -320,7 +320,7 @@ export default function Header(props) {
               <div className={userDropDown ? "user-profile-dropdown" : "no-user-profile-dropdown"} id="user-dropdown">
                 <label>
                   <ul>
-                    <li onClick={()=>navigate("/accountsettings")}>Account Settings</li>
+                    <li onClick={()=>navigate("/account_settings")}>Account Settings</li>
                     <li onClick={signOut}>Sign Out</li>
                   </ul>
                 </label>

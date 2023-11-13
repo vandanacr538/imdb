@@ -1,5 +1,5 @@
 import React from 'react'
-import './login.css';
+import './signin.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import History from '../../Components/History/History';
@@ -11,7 +11,7 @@ export default function Login(props) {
   const navigate=useNavigate();
 
   const gotoLoginInWithIMDb=()=>{
-    navigate("/loginwithIMDb")
+    navigate("/signin/signin_with_imdb")
   }
   const loginWithGoogle = useGoogleLogin({   
     onSuccess: (credentialResponse) => {
@@ -37,7 +37,7 @@ export default function Login(props) {
     }
   }
   const gotoCreateAccPage=()=>{
-    navigate("/createaccount");
+    navigate("/create_account");
   }
 
   return (

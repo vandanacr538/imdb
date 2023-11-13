@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./../loginandcreateacc.css"
+import "../../CommonStyle/signinandcreateacc.css";
 import "./createaccount.css"
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, WarningAmber } from "@mui/icons-material";
@@ -84,7 +84,7 @@ export default function CreateAccount() {
           }
           else{
             const createAccAPIResponseToken=result.data.token
-            navigate("/otp_verification_to_create_acc", {state:{createAccAPIResponseToken}});
+            navigate("/create_account/otp_verification", {state:{createAccAPIResponseToken}});
           }
         }
       }
@@ -145,7 +145,7 @@ export default function CreateAccount() {
         </div>
         <div id="signin-link-div-in-createacc">
             Already have an account?
-            <div id="signin-link" onClick={()=>navigate("/loginwithIMDb")}>Sign in<ArrowRight style={{fontSize:"15px"}}/></div>
+            <div id="signin-link" onClick={()=>navigate("/signin/signin_with_imdb")}>Sign in<ArrowRight style={{fontSize:"15px"}}/></div>
         </div>
       </div>
     </div>

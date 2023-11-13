@@ -3,13 +3,11 @@ import "./watchlist.css";
 import { Add, Bookmark, Done, Star } from "@mui/icons-material";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import "../../utils/interceptor";
 
 export default function Watchlist(props) {
   const [watchlistPageArr, setWatchlistPageArr] = useState();
   const [trailerVideoKey, setTrailerVideoKey] = useState();
-  const navigate = useNavigate();
 
   const getYourWatchlist = async () => {
     try {

@@ -69,7 +69,7 @@ export default function ProtectedLayout() {
             </p>
             <button
               className="btn-empty-watchlist"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/signin")}
             >
               Sign in to IMDb
             </button>
