@@ -61,6 +61,7 @@
 .signin-page-detail strong, .signin-page-detail p{
     margin: 2px;
     font-size: 13px;
+    text-align: justify;
 }
 .g-signin{
     margin-top: 25px;

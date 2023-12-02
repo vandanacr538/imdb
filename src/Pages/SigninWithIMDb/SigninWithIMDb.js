@@ -5,7 +5,7 @@ import '../../CommonStyle/signinandcreateacc.css';
 import './signinwithimdb.css';
 import base64 from "base-64";
 
-export default function LoginWithIMDb(props) {
+export default function SigninWithIMDb(props) {
   const [loginData, setLoginData]=useState({});
   const [loginError, setLoginError]=useState("");
   const [emptyError, setEmptyError]=useState({emailError:"", passwordError:""});

@@ -7,7 +7,7 @@ import google from "../../Assets/google.png";
 import { useGoogleLogin } from '@react-oauth/google'; 
 import { decodeToken } from 'react-jwt';
 
-export default function Login(props) {
+export default function Signin(props) {
   const navigate=useNavigate();
 
   const gotoLoginInWithIMDb=()=>{
@@ -66,16 +66,16 @@ export default function Login(props) {
               <p>Discover shows you'll love.</p>
             </div>
             <div className='signin-page-detail'>
+              <strong>What you find on IMDb</strong>
+              <p>You can watch any new latest movie trailers on IMDb.</p>
+            </div>
+            <div className='signin-page-detail'>
               <strong>Your Watchlist</strong>
-              <p>Track everything you want to watch and receive e-mail when movies open in theaters.</p>
+              <p>Track everything you want to watch and save it in your watchlist.</p>
             </div>
             <div className='signin-page-detail'>
-              <strong>Your Ratings</strong>
-              <p>Rate and remember everything you've seen.</p>
-            </div>
-            <div className='signin-page-detail'>
-              <strong>Contribute to IMDb</strong>
-              <p>Add data that will be seen by millions of people and get cool badges.</p>
+              <strong>Search in IMDb</strong>
+              <p>You can search any new latest movie in search bar and you acn watch trailor.</p>
             </div>
           </div>
         </div>
