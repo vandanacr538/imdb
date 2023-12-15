@@ -89,7 +89,7 @@ export default function Header(props) {
   const getWatchlistCount=async()=>{
     try{
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist"
+        "https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
       );
       console.log(res.data.results.length);
       setWatchlistMoviesCount(res.data.results.length);
@@ -123,7 +123,7 @@ export default function Header(props) {
   }
   const getUserData=async()=>{
     try{
-      const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata");
+      const result = await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/getuserprofiledata");
       setUserProfileData(decodeToken(result.data.token));
     }
     catch(e){

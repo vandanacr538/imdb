@@ -19,7 +19,7 @@ export default function ProtectedLayout() {
   };
   const checkMyWachlist = async () => {
     try{
-      const res = await axios.get("http://localhost:8080/watchlist/mywatchlist");
+      const res = await axios.get("https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist");
       setMyWatchlist(res.data.results);
     }
     catch(e){

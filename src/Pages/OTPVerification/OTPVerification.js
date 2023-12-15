@@ -22,7 +22,7 @@ export default function OTPVerification(props) {
   }
   const resendOTP=async()=>{
     try{
-      let result=await axios.post("http://localhost:8080/createaccount/resendotp", {}, 
+      let result=await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/resendotp", {}, 
       {
         headers:{
           Authorization: base64.encode(email)
@@ -44,7 +44,7 @@ export default function OTPVerification(props) {
         setOtpError("");
         const otpObj={otp:otp, email:email};
         try{
-            let result=await axios.post("http://localhost:8080/createaccount/verifyotp", {},
+            let result=await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/verifyotp", {},
             {
               headers:{
                 Authorization:base64.encode(JSON.stringify(otpObj))

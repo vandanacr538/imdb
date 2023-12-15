@@ -12,7 +12,7 @@ export default function Watchlist(props) {
   const getYourWatchlist = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist"
+        "https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
       );
       setWatchlistPageArr(res.data.results);
       props.setWatchlistMoviesCount(res.data.results.length);
@@ -52,7 +52,7 @@ export default function Watchlist(props) {
   const removeFromWatchlist=async(element)=>{
     try{
       const res = await axios.delete(
-        "http://localhost:8080/watchlist/deletemoviefromwatchlist", 
+        "https://imdb-backend-gc2o.onrender.com/watchlist/deletemoviefromwatchlist", 
         { data: { element } 
         }
       );

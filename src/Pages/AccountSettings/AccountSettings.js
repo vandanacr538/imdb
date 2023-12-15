@@ -74,7 +74,7 @@ export default function AccountSettings() {
   const getUserData=async()=>{
     if(localStorage.getItem("token")){
       try{
-        const result = await axios.post("http://localhost:8080/createaccount/getuserprofiledata");
+        const result = await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/getuserprofiledata");
         setEditUserProfile(decodeToken(result.data.token));
       }
       catch(e){
@@ -85,7 +85,7 @@ export default function AccountSettings() {
   const updateUserProfile= async()=>{
     encodeEditUserProfile=base64.encode(JSON.stringify(editUserProfile));
     try{
-      const result=await axios.post("http://localhost:8080/createaccount/edituserdata"); 
+      const result=await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/edituserdata"); 
       if(result.status===200){
         localStorage.setItem("token", result.data.token);
         getUserData();

@@ -68,7 +68,7 @@ export default function CreateAccount() {
       // console.log("call api");
       const encodeCreateAccData=base64.encode(JSON.stringify(createAccData));
       try{
-        let result=await axios.post("http://localhost:8080/createaccount/createaccountapi", 
+        let result=await axios.post("https://imdb-backend-gc2o.onrender.com/createaccount/createaccountapi", 
         {}, {
           headers:{
             Authorization: encodeCreateAccData

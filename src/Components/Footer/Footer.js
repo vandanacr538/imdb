@@ -32,7 +32,7 @@ export default function Footer() {
                 <a href='https://www.facebook.com/imdb' target='blank' className='footer-sm-link'><Facebook /></a>
             </div>
             <p>an amazon company</p>
-            <p className='footer-copyright'>© 1990-2023 by IMDb.com, Inc.</p>
+            <p className='footer-copyright'>© 2023, IMDb Clone, Made by Vandana.</p>
         </footer>
     </>
   )

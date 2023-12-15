@@ -49,7 +49,7 @@ export default function MovieCarousel(props) {
   const getWatchlistItems = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/watchlist/mywatchlist"
+        "https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
       );
       setWatchlistItems(
         res.data.results.map((elem) => {
@@ -64,7 +64,7 @@ export default function MovieCarousel(props) {
     if (localStorage.getItem("token")) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/watchlist/addtowatchlist",
+          "https://imdb-backend-gc2o.onrender.com/watchlist/addtowatchlist",
           element,
         );
         if (response.status === 200) {
@@ -81,7 +81,7 @@ export default function MovieCarousel(props) {
   const removeFromWatchlist = async (element) => {
     try {
       const res = await axios.delete(
-        "http://localhost:8080/watchlist/deletemoviefromwatchlist",
+        "https://imdb-backend-gc2o.onrender.com/watchlist/deletemoviefromwatchlist",
         {
           data: { element },
         }

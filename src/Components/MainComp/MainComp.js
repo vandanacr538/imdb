@@ -18,7 +18,7 @@ export default function MainComp() {
           <Route path="/" element={<ProtectedLayout/>}>
             <Route path="/" element={<MovieCarousel 
             heading="From Your Watchlist" 
-            api="http://localhost:8080/watchlist/mywatchlist"
+            api="https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
             auth="own"/>}
             >
             </Route>
