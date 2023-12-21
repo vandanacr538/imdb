@@ -60,9 +60,15 @@
 .carousel-nav:hover{
     color: #f5c518;;
 }
+.vertical-m-details{
+    margin-left: 10px;
+}
 .video-link{
-    text-decoration: none;
+    background: none;
+    border: none;
     color: #fff;
+    cursor: pointer;
+    margin-left: -5px;
 }
 .video-link:hover{
     color: #f5c518;
@@ -80,9 +86,6 @@
 .vertical-movies{
     margin-top:10px;
     display: flex;
-}
-.vertical-m-details{
-    margin-left: 10px;
 }
 #browse-trailer{
     cursor: pointer;

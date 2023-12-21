@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import History from '../../Components/History/History';
 import google from "../../Assets/google.png";
 import { useGoogleLogin } from '@react-oauth/google'; 
-import { decodeToken } from 'react-jwt';
 
 export default function Signin(props) {
   const navigate=useNavigate();
@@ -15,7 +14,6 @@ export default function Signin(props) {
   }
   const loginWithGoogle = useGoogleLogin({   
     onSuccess: (credentialResponse) => {
-      console.log(credentialResponse);
       sendToken(credentialResponse.access_token);
     },
     onError: (error) => console.log('Login Failed:', error)
@@ -30,7 +28,6 @@ export default function Signin(props) {
     });
     if(result.status===200 && (result.data.msg==="Already verified user" || result.data.msg==="oauth successfull")){
       localStorage.setItem("token", result.data.token);
-      console.log(decodeToken(result.data.token))
       props.setAuthButton(true);
       navigate("/");
       window.location.reload();

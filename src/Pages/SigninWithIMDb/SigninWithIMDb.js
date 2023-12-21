@@ -64,7 +64,6 @@ export default function SigninWithIMDb(props) {
       }
       catch(e){
         if(e.response.status===403){
-          console.log("403");
           setLoginError(e.response.data.msg);
         }
         else if(e.response.status===401){

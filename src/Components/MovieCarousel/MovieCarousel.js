@@ -57,7 +57,7 @@ export default function MovieCarousel(props) {
         })
       );
     } catch (e) {
-      console.log(e);
+      alert(e.response.data.msg);
     }
   };
   const addToWatchlist = async (element) => {
@@ -91,7 +91,7 @@ export default function MovieCarousel(props) {
         // window.location.reload();
       }
     } catch (e) {
-      console.log(e);
+      alert(e.response.data.msg);
     }
   };
   const getMovieIds = (movieslistfromAPI) => {

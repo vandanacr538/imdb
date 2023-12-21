@@ -39,3 +39,10 @@
 .resend-otp:hover{
     text-decoration: underline;
 }
+.otp-sent{
+    margin: 5px 0px -10px;
+    font-size: 12px;
+    color: #000;
+    display: flex;
+    align-items: center;
+}

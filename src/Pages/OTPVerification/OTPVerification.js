@@ -10,6 +10,7 @@ import { decodeToken } from 'react-jwt';
 export default function OTPVerification(props) {
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] =useState("");
+  const [otpSent, setOtpSent] = useState("");
   const navigate=useNavigate();
   const location = useLocation();
   const  {email}= decodeToken(location.state.createAccAPIResponseToken);
@@ -29,11 +30,14 @@ export default function OTPVerification(props) {
         }
       });
       if(result.status===200){
-        console.log(result.data.msg);
+        setOtpSent(result.data.msg);
+        setTimeout(()=>{
+          setOtpSent("");
+        }, 20000);
       }
     }
     catch(e){
-      console.log(e);
+      alert(e.response.data.msg);
     }
   }
   const validateOTP=async()=>{
@@ -51,7 +55,6 @@ export default function OTPVerification(props) {
               }
             });
             if(result.status===200){
-                console.log(result.data.token);
                 localStorage.setItem("token", result.data.token);
                 props.setAuthButton(true);
                 navigate("/");
@@ -88,6 +91,9 @@ export default function OTPVerification(props) {
           <p className={otpError!=="" ? "otp-error" : "no-otp-error"}>
             <Error style={{color:"#c40000", marginRight:"5px"}}/>
             {otpError}
+          </p>
+          <p className={otpSent!=="" ? "otp-sent" : "no-otp-error"}>
+            {otpSent}
           </p>
         </div>
         <div className='page-task-complete-btn-container'>

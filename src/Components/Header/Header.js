@@ -78,7 +78,6 @@ export default function Header(props) {
     }
     else{
       historyItems.push({poster_path:elem.poster_path});
-      console.log(historyItems)
     }
     Cookies.set("history", JSON.stringify(historyItems));
     navigate("/play/" + elem.id);
@@ -91,11 +90,10 @@ export default function Header(props) {
       const res = await axios.get(
         "https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
       );
-      console.log(res.data.results.length);
       setWatchlistMoviesCount(res.data.results.length);
     }
     catch(e){
-      console.log(e);
+      alert(e.response.data.msg);
     }
   }
   const gotoWatchlistPage=()=>{
@@ -127,7 +125,7 @@ export default function Header(props) {
       setUserProfileData(decodeToken(result.data.token));
     }
     catch(e){
-      console.log(e);
+      alert(e.response.data.msg);
     }
   }
   const handleClickUserDropDown=(e)=>{

@@ -56,7 +56,6 @@ export default function CreateAccount() {
       }
     }
     const validateCreateAccount= ()=>{
-        console.log(createAccData);
         setErrorsArray([]);
         validateName();
         validateEmail();
@@ -77,7 +76,6 @@ export default function CreateAccount() {
         );
         if(result.status===200){
           if(result.data.token==="already exists"){
-            console.log(result.data.token);
             document.querySelector(".page-error-box").style.display="flex";
             setErrorsArray((previousData)=>([...previousData, result.data.msg]));
             setIsAllDataValid(false);
@@ -89,7 +87,7 @@ export default function CreateAccount() {
         }
       }
       catch(e){
-        console.log(e.response.data.msg);
+        alert(e.response.data.msg);
       }
     }
     useEffect(()=>{

@@ -78,7 +78,7 @@ export default function AccountSettings() {
         setEditUserProfile(decodeToken(result.data.token));
       }
       catch(e){
-        console.log(e);
+        alert(e.response.data.msg);
       }
     }
   }
@@ -94,7 +94,7 @@ export default function AccountSettings() {
       } 
     } 
     catch(e){
-      console.log(e.response.data.msg);
+      alert(e.response.data.msg);
     }
   }
   const handleClickSaveData=()=>{

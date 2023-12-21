@@ -38,7 +38,6 @@ export default function Main() {
   const handleClickForward = () => {
     setBannerUpdate(false);
     setBannerUpdate((state) => {
-        console.log("value is", state); 
         clearTimeout(myTimeout);
         return state;
     });
@@ -60,7 +59,6 @@ export default function Main() {
     setBannerUpdate(false);
     setBannerUpdate((state)=>{
       clearTimeout(myTimeout);
-      console.log("value updated:"+state);
       return state;
     });
     if (moviesArr.indexOf(currentMovie) === 0) {
@@ -86,7 +84,6 @@ export default function Main() {
     }
     else{
       historyItems.push({poster_path:elem.poster_path});
-      console.log(historyItems)
     }
     Cookies.set("history", JSON.stringify(historyItems));
     navigate("/play/" + elem.id);
@@ -98,7 +95,6 @@ export default function Main() {
     );
     setMoviesArr(res.data.results);
     setCurrentMovie(res.data.results[0]);
-    console.log(res);
   };
 
   useEffect(() => {
@@ -122,9 +118,9 @@ export default function Main() {
         </button>
         <img src={`https://image.tmdb.org/t/p/w1280/` + currentMovie.poster_path} alt="movie" className="horizontal-banner"></img>
         <div className="horizontal-banner-details">
-          <a href="" className="video-link">
+          <button className="video-link">
             <PlayCircleOutline sx={{ fontSize: "60px" }} onClick={()=>handleClickVideo(currentMovie)}/>
-          </a>
+          </button>
           <h1 className="horizontal-banner-title">{currentMovie.title}</h1>
         </div>
         <button
@@ -147,9 +143,9 @@ export default function Main() {
                       <img src={`https://image.tmdb.org/t/p/w92/` + element.poster_path} alt="movie"></img>
                     </div>
                     <div className="vertical-m-details">
-                      <a href="" className="video-link">
+                      <button className="video-link">
                         <PlayCircleOutline sx={{ fontSize: "40px" }} onClick={()=>handleClickVideo(element)} />
-                      </a>
+                      </button>
                       <p>{element.original_title}</p>
                       <p>Release on {element.release_date}</p>
                     </div>

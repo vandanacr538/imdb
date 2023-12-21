@@ -129,9 +129,12 @@
 }
 .wactchlist-page-browse-link{
     margin: 10px auto;
-    text-decoration: none;
     color: #0066c0;
     font-size: 14px;
+    font-family: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 .wactchlist-page-browse-link:hover{
     text-decoration: underline;

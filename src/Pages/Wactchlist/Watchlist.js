@@ -4,10 +4,12 @@ import { Add, Bookmark, Done, Star } from "@mui/icons-material";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import "../../utils/interceptor";
+import { useNavigate } from "react-router-dom";
 
 export default function Watchlist(props) {
   const [watchlistPageArr, setWatchlistPageArr] = useState();
   const [trailerVideoKey, setTrailerVideoKey] = useState();
+  const navigate=useNavigate();
 
   const getYourWatchlist = async () => {
     try {
@@ -46,7 +48,7 @@ export default function Watchlist(props) {
         setTrailerVideoKey(movieKeysArr);
       });
     } catch (e) {
-      console.log(e);
+      alert(e.response.data.msg);
     }
   };
   const removeFromWatchlist=async(element)=>{
@@ -62,7 +64,7 @@ export default function Watchlist(props) {
       }
     }
     catch(e){
-      console.log(e);
+      alert(e.response.data.msg);
     } 
   }
   useEffect(() => {
@@ -153,9 +155,9 @@ export default function Watchlist(props) {
                     Add movies and shows to your Watchlist to keep track of what
                     you want to watch.
                   </p>
-                  <a href="" className="wactchlist-page-browse-link">
+                  <button className="wactchlist-page-browse-link" onClick={()=>navigate("/")}>
                     Browse Popular movies
-                  </a>
+                  </button>
                 </div>
               )}
             </>

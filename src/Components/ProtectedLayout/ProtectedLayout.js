@@ -23,7 +23,7 @@ export default function ProtectedLayout() {
       setMyWatchlist(res.data.results);
     }
     catch(e){
-      console.log(e);
+      alert(e.response.data.msg);
     }
   };
 
