@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./header.css";
 import { Box, Button, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,20 +20,21 @@ import Cookies from "js-cookie";
 import { decodeToken } from "react-jwt";
 import axios from "axios";
 import "../../utils/interceptor";
+import { AuthContext } from "../../Context/AuthContext";
 let historyItems=[];
 
-export default function Header(props) {
+export default function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [userProfileData, setUserProfileData]=useState("");
   const [userDropDown, setUserDropDown]=useState(false);
-  const {watchlistMoviesCount, setWatchlistMoviesCount} = props;
   const [allMoviesList, setAllMoviesList] = useState();
   const [searchOutputArr, setSearchOutputArr] = useState([]);
   const [noSearchData, setNoSearchData] = useState(false);
   const closeUserDropDown = useRef();
   const navigate=useNavigate();
+  const {authButton, watchlistMoviesCount, setWatchlistMoviesCount} = useContext(AuthContext);
   const gotoHome=()=>{
     navigate("/");
   }
@@ -147,7 +148,7 @@ export default function Header(props) {
       getWatchlistCount();
     }
     getAllMoviesList();
-  }, [props.authButton])
+  }, [authButton])
 
   return (
     <div>
@@ -310,7 +311,7 @@ export default function Header(props) {
         <Button className="header-btn" 
         onClick={gotoSignInPage} 
         ref={closeUserDropDown}>
-          {props.authButton ? (
+          {authButton ? (
             <>
               <AccountCircle />
               <span className="header-btn-text">{userProfileData.name}</span>

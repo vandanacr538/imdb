@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "../../CommonStyle/signinandcreateacc.css";
 import "./otpverification.css"
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -6,14 +6,16 @@ import { Error } from '@mui/icons-material';
 import axios from 'axios';
 import base64 from "base-64";
 import { decodeToken } from 'react-jwt';
+import { AuthContext } from '../../Context/AuthContext';
 
-export default function OTPVerification(props) {
+export default function OTPVerification() {
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] =useState("");
   const [otpSent, setOtpSent] = useState("");
   const navigate=useNavigate();
   const location = useLocation();
   const  {email}= decodeToken(location.state.createAccAPIResponseToken);
+  const {setAuthButton} = useContext(AuthContext);
 
   const gotoHome=()=>{
     navigate("/");
@@ -56,7 +58,7 @@ export default function OTPVerification(props) {
             });
             if(result.status===200){
                 localStorage.setItem("token", result.data.token);
-                props.setAuthButton(true);
+                setAuthButton(true);
                 navigate("/");
             }
         }

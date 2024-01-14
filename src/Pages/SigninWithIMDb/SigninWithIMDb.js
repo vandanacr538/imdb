@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../CommonStyle/signinandcreateacc.css';
 import './signinwithimdb.css';
 import base64 from "base-64";
+import { AuthContext } from '../../Context/AuthContext';
 
-export default function SigninWithIMDb(props) {
+export default function SigninWithIMDb() {
   const [loginData, setLoginData]=useState({});
   const [loginError, setLoginError]=useState("");
   const [emptyError, setEmptyError]=useState({emailError:"", passwordError:""});
   const navigate=useNavigate();
+  const {setAuthButton} = useContext(AuthContext);
 
   const gotoHome=()=>{
     navigate("/");
@@ -58,7 +60,7 @@ export default function SigninWithIMDb(props) {
         });
         if(result.status===200){
           localStorage.setItem("token", result.data.token);
-          props.setAuthButton(true);
+          setAuthButton(true);
           navigate("/");
         }
       }

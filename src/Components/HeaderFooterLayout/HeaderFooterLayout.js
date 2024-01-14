@@ -3,11 +3,11 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Outlet } from 'react-router-dom'
 
-export default function HeaderFooterLayout(props) {
-  const {authButton, watchlistMoviesCount, setWatchlistMoviesCount}=props;
+export default function HeaderFooterLayout() {
+
   return (
     <div>
-        <Header authButton={authButton} watchlistMoviesCount={watchlistMoviesCount} setWatchlistMoviesCount={setWatchlistMoviesCount}/>
+        <Header/>
         <Outlet/>
         <Footer/>
     </div>

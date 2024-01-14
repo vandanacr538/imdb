@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './signin.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import History from '../../Components/History/History';
 import google from "../../Assets/google.png";
 import { useGoogleLogin } from '@react-oauth/google'; 
+import { AuthContext } from '../../Context/AuthContext';
 
-export default function Signin(props) {
+export default function Signin() {
   const navigate=useNavigate();
+  const {setAuthButton} = useContext(AuthContext);
 
   const gotoLoginInWithIMDb=()=>{
     navigate("/signin/signin_with_imdb")
@@ -28,7 +30,7 @@ export default function Signin(props) {
     });
     if(result.status===200 && (result.data.msg==="Already verified user" || result.data.msg==="oauth successfull")){
       localStorage.setItem("token", result.data.token);
-      props.setAuthButton(true);
+      setAuthButton(true);
       navigate("/");
       window.location.reload();
     }

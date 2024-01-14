@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./watchlist.css";
 import { Add, Bookmark, Done, Star } from "@mui/icons-material";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import "../../utils/interceptor";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
-export default function Watchlist(props) {
+export default function Watchlist() {
   const [watchlistPageArr, setWatchlistPageArr] = useState();
   const [trailerVideoKey, setTrailerVideoKey] = useState();
+  const {watchlistMoviesCount, setWatchlistMoviesCount} = useContext(AuthContext);
   const navigate=useNavigate();
 
   const getYourWatchlist = async () => {
@@ -17,7 +19,7 @@ export default function Watchlist(props) {
         "https://imdb-backend-gc2o.onrender.com/watchlist/mywatchlist"
       );
       setWatchlistPageArr(res.data.results);
-      props.setWatchlistMoviesCount(res.data.results.length);
+      setWatchlistMoviesCount(res.data.results.length);
       const getIds = res.data.results.map(async (element) => {
         const response = await axios.get(
           "https://api.themoviedb.org/3/movie/" +
@@ -60,7 +62,7 @@ export default function Watchlist(props) {
       );
       if(res.status===200){
         getYourWatchlist();
-        props.setWatchlistMoviesCount(watchlistPageArr.length);
+        setWatchlistMoviesCount(watchlistPageArr.length);
       }
     }
     catch(e){
@@ -71,7 +73,7 @@ export default function Watchlist(props) {
     if(localStorage.getItem("token")){
       getYourWatchlist();
     }
-  }, [props.watchlistMoviesCount]);
+  }, [watchlistMoviesCount]);
   return (
     <div className="watchlist-page">
       <div className="watchlist-page-box">
