@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# IMDb Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+IMDb Clone is a website where you can find new, latest movie trailers and you can add movies to watchlist and watch the movie when it opens in theaters.
 
-## Available Scripts
+![imdbClone](https://github.com/vandanacr538/imdb/assets/120461751/d51e2cc3-d417-4c1d-895f-d1df9efa8dd8)
 
-In the project directory, you can run:
+## Authors
 
-### `npm start`
+- [vandanacr538](https://github.com/vandanacr538)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- ReactJS
+- CSS
+- JavaScript
+- NodeJS
+- Express
+- Material-UI
+- nodemon
+- npm packages
+- Mongodb
 
-### `npm test`
+### Front-end
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- To run this project front-end(client) locally follow following step below:-
+- Create folder in your local system
+- Clone the project
+```bash
+git clone https://github.com/vandanacr538/imdb.git
+```
+- The project will be downloaded.
+- Open imdb folder with VS-Code
+- Open terminal
+- Enter `npm install`
+- Enter `npm start`
 
-### `npm run build`
+### Back-end
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### Back-end repository: [imdb-BackEnd](https://github.com/vandanacr538/imdb-BackEnd.git)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- To run this project back-end(server) locally follow following step below:-
+- Create folder in your local system
+- Clone the project
+```bash
+git clone https://github.com/vandanacr538/imdb-BackEnd.git
+```
+- The project will be downloaded.
+- Open imdb-BackEnd folder with VS-Code
+- Open terminal
+- Enter `npm install`
+- Enter `nodemon index.js`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ScreenShots
 
-### `npm run eject`
+![landingpage](https://github.com/vandanacr538/imdb/assets/120461751/17f048a3-bc93-42d9-8909-50dc6c2b4943)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![watchlist](https://github.com/vandanacr538/imdb/assets/120461751/145aba40-511f-4728-8c54-938415bb15e6)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![carousel](https://github.com/vandanacr538/imdb/assets/120461751/fd4dffa8-818b-493c-b808-596163bd4f48)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![playpage](https://github.com/vandanacr538/imdb/assets/120461751/f2d9ff6c-f5be-4b85-9cd0-634a72b939f4)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Features
 
-## Learn More
+- Single Page Application(Routing in react)
+- Implementing Carousel
+- SignIn with Google
+- Middleware
+- Routing in Nodejs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Lessons Learned
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Challenges I faced while working in the project is to create database and fetch data accoridingly.
+- How to use React and differnt npm packages effectively to build web pages.
